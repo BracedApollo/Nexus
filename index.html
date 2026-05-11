@@ -334,6 +334,200 @@ select.inp{cursor:pointer}
 .sp-disconnected{display:flex;align-items:center;gap:8px;padding:12px 18px;font-size:10px;color:var(--t4)}
 .sp-dot{width:7px;height:7px;border-radius:50%;background:#1DB954;flex-shrink:0}
 .sp-dot.off{background:var(--t4)}
+
+/* ─── SECRET HEART TRIGGER ─── */
+.secret-heart{
+  position:fixed;bottom:18px;left:18px;
+  width:28px;height:28px;
+  cursor:pointer;z-index:9;
+  opacity:0;transition:opacity .3s;
+  display:none;
+}
+.secret-heart:hover{opacity:.6}
+.secret-heart svg{width:28px;height:28px;fill:#6b3a2a}
+#view-journal.active ~ * .secret-heart,
+body.journal-active .secret-heart{opacity:.04;display:flex;align-items:center;justify-content:center}
+body.journal-active .secret-heart:hover{opacity:.45}
+
+/* ─── PASSCODE SCREEN ─── */
+.passcode-overlay{
+  display:none;position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.97);backdrop-filter:blur(20px);
+  align-items:center;justify-content:center;flex-direction:column;gap:20px;
+}
+.passcode-overlay.open{display:flex}
+.passcode-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;width:280px}
+.passcode-icon{font-size:32px;margin-bottom:4px}
+.passcode-title{font-family:var(--display);font-size:22px;font-weight:300;color:var(--t1);letter-spacing:.02em}
+.passcode-dots{display:flex;gap:10px;margin:4px 0}
+.pc-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.3);transition:background .15s}
+.pc-dot.filled{background:#fff;border-color:#fff}
+.passcode-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:220px}
+.pc-key{
+  height:52px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);
+  font-family:var(--ui);font-size:16px;font-weight:600;color:var(--t1);
+  cursor:pointer;transition:all .1s;user-select:none;
+}
+.pc-key:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
+.pc-key:active{transform:scale(.95)}
+.pc-key.del{font-size:13px;color:var(--t3)}
+.pc-key.empty{border:none;background:none;pointer-events:none}
+.pc-error{font-size:11px;color:#e05050;font-family:var(--mono);height:16px;letter-spacing:.06em;text-align:center}
+
+/* ─── SECRET HER VIEW ─── */
+#view-secret{background:var(--bg)}
+.her-profile{display:flex;align-items:flex-start;gap:20px;padding:20px;background:var(--s2);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px}
+.her-av{width:90px;height:90px;border-radius:50%;background:var(--s1);border:1px solid var(--line2);flex-shrink:0;overflow:hidden;position:relative;cursor:pointer}
+.her-av img{width:100%;height:100%;object-fit:cover}
+.her-av input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.her-av-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px}
+.her-name{font-family:var(--display);font-size:28px;font-weight:300;color:var(--t1);margin-bottom:4px}
+.her-tagline{font-size:11px;color:var(--t3);font-style:italic;margin-bottom:10px}
+.her-tag{display:inline-flex;align-items:center;padding:2px 9px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3);margin:2px}
+.her-tag.love{border-color:rgba(180,80,100,.4);color:#c47080;background:rgba(180,80,100,.07)}
+.her-tag.food{border-color:rgba(140,160,100,.4);color:#9aaa70;background:rgba(140,160,100,.07)}
+.her-tag.nope{border-color:rgba(158,107,107,.3);color:var(--red)}
+
+.wish-card{display:flex;align-items:flex-start;gap:12px;padding:12px;border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;transition:border-color .12s;cursor:pointer}
+.wish-card:hover{border-color:var(--line2)}
+.wish-thumb{width:52px;height:52px;border-radius:5px;object-fit:cover;background:var(--s2);flex-shrink:0}
+.wish-thumb-ph{width:52px;height:52px;border-radius:5px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.wish-title{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.wish-link{font-size:10px;color:var(--t4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.wish-note{font-size:10px;color:var(--t3);margin-top:3px;font-style:italic}
+.wish-price{font-family:var(--mono);font-size:10px;color:#9aaa70;font-weight:300;flex-shrink:0}
+
+.date-card{padding:14px;border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px}
+.date-card-title{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:3px}
+.date-card-meta{font-size:10px;color:var(--t3);margin-bottom:4px}
+.date-card-note{font-size:10px;color:var(--t4);font-style:italic}
+.date-tag{display:inline-flex;align-items:center;padding:2px 7px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3);margin-right:4px}
+.date-tag.free{border-color:rgba(122,138,120,.4);color:#7a8a78}
+.date-tag.cheap{border-color:rgba(200,170,100,.4);color:#c8aa64}
+.date-tag.special{border-color:rgba(158,107,107,.3);color:#c47080}
+
+.ai-date-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
+.ai-date-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(196,112,128,.5),transparent)}
+.ai-date-loading{font-size:11px;color:var(--t4);font-style:italic;animation:pulse 1.8s ease-in-out infinite}
+
+/* ─── SECTION TOGGLE (profile edit) ─── */
+.her-edit-section{margin-top:10px}
+.her-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+
+/* ─── WISHLIST ─── */
+.wl-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.wl-search{flex:1;min-width:160px;font-family:var(--ui);font-size:12px;padding:7px 12px;border:1px solid var(--line2);border-radius:5px;background:transparent;color:var(--t1);outline:none;transition:border-color .12s}
+.wl-search:focus{border-color:#fff}
+.wl-search::placeholder{color:var(--t4)}
+.wl-filter-pill{padding:4px 12px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3);cursor:pointer;background:transparent;font-family:var(--ui);transition:all .12s;white-space:nowrap}
+.wl-filter-pill:hover{border-color:var(--line3);color:var(--t1)}
+.wl-filter-pill.active{background:#fff;border-color:#fff;color:#000}
+.wl-view-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2);border-radius:5px;background:transparent;color:var(--t3);cursor:pointer;transition:all .12s;flex-shrink:0}
+.wl-view-btn:hover{border-color:var(--line3);color:var(--t1)}
+.wl-view-btn.active{background:#fff;border-color:#fff;color:#000}
+
+/* Grid view */
+.wl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.wl-item{background:var(--s2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .12s;display:flex;flex-direction:column;position:relative}
+.wl-item:hover{border-color:var(--line2)}
+.wl-item-img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--s1);display:block}
+.wl-item-img-ph{width:100%;aspect-ratio:1;background:var(--s1);display:flex;align-items:center;justify-content:center;font-size:40px}
+.wl-item-body{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}
+.wl-item-name{font-size:12px;font-weight:500;color:var(--t1);line-height:1.35}
+.wl-item-store{font-size:9px;color:var(--t4);letter-spacing:.06em;text-transform:uppercase}
+.wl-item-price{font-family:var(--mono);font-size:11px;color:var(--t2);font-weight:300;margin-top:auto}
+.wl-item-footer{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-top:1px solid var(--line);gap:6px}
+.wl-cat-tag{padding:2px 7px;border-radius:99px;font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t4)}
+.wl-priority-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.wl-item-actions{display:flex;gap:4px}
+.wl-action-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:3px;border:none;background:none;cursor:pointer;font-size:11px;color:var(--t4);transition:all .1s}
+.wl-action-btn:hover{color:var(--t1);background:rgba(255,255,255,.06)}
+.wl-action-btn.del:hover{color:var(--red)}
+.wl-item.purchased{opacity:.45}
+.wl-item.purchased .wl-item-name{text-decoration:line-through}
+.purchased-badge{position:absolute;top:8px;right:8px;background:rgba(122,138,120,.9);color:#fff;font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
+
+/* List view */
+.wl-list{display:flex;flex-direction:column;gap:6px}
+.wl-list-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--s2);transition:border-color .12s}
+.wl-list-item:hover{border-color:var(--line2)}
+.wl-list-thumb{width:44px;height:44px;border-radius:4px;object-fit:cover;background:var(--s1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.wl-list-info{flex:1;min-width:0}
+.wl-list-name{font-size:12px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wl-list-meta{font-size:9px;color:var(--t4);margin-top:2px}
+.wl-list-price{font-family:var(--mono);font-size:11px;color:var(--t2);font-weight:300;flex-shrink:0}
+.wl-list-item.purchased{opacity:.45}
+.wl-list-item.purchased .wl-list-name{text-decoration:line-through}
+
+/* Stats bar */
+.wl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.wl-stat{background:var(--s2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.wl-stat-l{font-size:7px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t4);margin-bottom:5px}
+.wl-stat-v{font-family:var(--display);font-size:24px;font-weight:300;color:var(--t1);line-height:1}
+.wl-stat-s{font-family:var(--mono);font-size:8px;color:var(--t4);margin-top:3px;font-weight:300}
+
+/* Empty state */
+.wl-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:12px;text-align:center}
+.wl-empty-icon{font-size:40px;opacity:.4}
+.wl-empty-t{font-size:13px;color:var(--t3)}
+.wl-empty-s{font-size:11px;color:var(--t4);max-width:260px;line-height:1.6}
+
+@media(max-width:768px){
+  .wl-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .wl-stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ─── PHYSIQUE VAULT ─── */
+.physique-locked{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:36px 20px;text-align:center;background:var(--s2);border:1px solid var(--line);border-radius:var(--r)}
+.physique-locked-icon{font-size:36px;opacity:.5}
+.physique-locked-t{font-size:13px;color:var(--t2);font-family:var(--display);font-weight:300}
+.physique-locked-s{font-size:11px;color:var(--t4);max-width:260px;line-height:1.6}
+
+/* Passcode for physique — inline 3-digit */
+.ph-pc-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px}
+.ph-pc-dots{display:flex;gap:10px}
+.ph-pc-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.25);transition:background .15s}
+.ph-pc-dot.filled{background:#fff;border-color:#fff}
+.ph-pc-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;width:200px}
+.ph-pc-key{height:46px;border-radius:7px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);font-family:var(--ui);font-size:15px;font-weight:600;color:var(--t1);cursor:pointer;transition:all .1s;user-select:none}
+.ph-pc-key:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.2)}
+.ph-pc-key:active{transform:scale(.94)}
+.ph-pc-key.del{font-size:12px;color:var(--t3)}
+.ph-pc-error{font-size:10px;color:#e05050;font-family:var(--mono);height:14px;text-align:center;letter-spacing:.06em}
+
+/* Physique gallery */
+.physique-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.physique-card{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--s2);cursor:pointer;transition:border-color .12s}
+.physique-card:hover{border-color:var(--line2)}
+.physique-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.physique-card-footer{padding:8px 10px;display:flex;align-items:center;justify-content:space-between}
+.physique-card-date{font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:300}
+.physique-card-tag{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);padding:2px 6px;border-radius:3px;border:1px solid var(--line2)}
+.physique-del{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.7);border:none;color:rgba(255,255,255,.6);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.physique-card:hover .physique-del{opacity:1}
+.physique-del:hover{color:#fff;background:rgba(158,107,107,.8)}
+
+/* Lightbox */
+.physique-lightbox{display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.physique-lightbox.open{display:flex}
+.physique-lightbox img{max-height:80vh;max-width:90vw;object-fit:contain;border-radius:6px}
+.physique-lightbox-meta{font-family:var(--mono);font-size:10px;color:var(--t3);font-weight:300;letter-spacing:.1em}
+.physique-lightbox-close{position:fixed;top:20px;right:24px;background:none;border:none;color:rgba(255,255,255,.5);font-size:22px;cursor:pointer;transition:color .12s}
+.physique-lightbox-close:hover{color:#fff}
+
+/* Timeline strip */
+.physique-timeline{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+.physique-timeline::-webkit-scrollbar{height:2px}
+.physique-timeline-item{flex-shrink:0;cursor:pointer;opacity:.55;transition:opacity .15s}
+.physique-timeline-item.active{opacity:1}
+.physique-timeline-item img{width:52px;height:68px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+.physique-timeline-item.active img{border-color:rgba(255,255,255,.5)}
+.physique-timeline-date{font-family:var(--mono);font-size:7px;color:var(--t4);text-align:center;margin-top:3px;font-weight:300}
+
+@media(max-width:768px){
+  .physique-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
@@ -351,7 +545,7 @@ select.inp{cursor:pointer}
       <canvas id="hub-canvas"></canvas>
       <div class="hub-overlay">
         <div class="hub-watermark" id="hub-watermark">Neural Hub · <span id="hub-date"></span></div>
-        <div class="hub-help"><span>Click any node to enter</span></div>
+        <div class="hub-help"><span style="opacity:0;pointer-events:none"></span></div>
       </div>
     </div>
   </div>
@@ -373,6 +567,18 @@ select.inp{cursor:pointer}
       <div class="grid g2" style="margin-top:14px">
         <div class="card"><div class="card-hd"><span class="card-hd-t">Weight log</span><button class="card-hd-a" onclick="openModal('m-weight')">+ Log</button></div><div class="card-bd card-bd-np" style="padding:6px 16px 12px" id="body-log"></div></div>
         <div class="card"><div class="card-hd"><span class="card-hd-t">Calculations</span></div><div class="card-bd card-bd-np" style="padding:6px 16px 12px" id="body-calcs"></div></div>
+      </div>
+      <!-- Physique vault -->
+      <div class="card" style="margin-top:14px">
+        <div class="card-hd">
+          <span class="card-hd-t">Physique vault</span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span id="physique-status-lbl" style="font-family:var(--mono);font-size:8px;color:var(--t4);font-weight:300">Locked 🔒</span>
+            <button class="card-hd-a" id="physique-add-btn" style="display:none" onclick="openModal('m-physique-add')">+ Add photo</button>
+            <button class="card-hd-a" id="physique-lock-btn" style="display:none" onclick="physiquelock()">Lock</button>
+          </div>
+        </div>
+        <div class="card-bd" id="physique-vault"></div>
       </div>
     </div>
   </div>
@@ -617,6 +823,79 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
+  <!-- WISHLIST VIEW -->
+  <div class="view" id="view-wishlist">
+    <div class="page-wrap">
+      <div class="page-hd">
+        <div><h1>Wishlist</h1><div class="sub">Your personal registry · track what you want, what you need, what you're saving for</div></div>
+        <button class="btn btn-o btn-sm" onclick="openWlAdd()">+ Add item</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="wl-stats" id="wl-stats"></div>
+
+      <!-- Toolbar: search + filter + view toggle -->
+      <div class="wl-toolbar">
+        <input class="wl-search" id="wl-search" placeholder="Search your wishlist…" oninput="renderWishlist()">
+        <div style="display:flex;gap:5px;flex-wrap:wrap" id="wl-cat-filters"></div>
+        <div style="display:flex;gap:4px;margin-left:auto">
+          <button class="wl-view-btn active" id="wl-btn-grid" onclick="setWlView('grid')" title="Grid view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6" rx="1"/><rect x="8" y="0" width="6" height="6" rx="1"/><rect x="0" y="8" width="6" height="6" rx="1"/><rect x="8" y="8" width="6" height="6" rx="1"/></svg>
+          </button>
+          <button class="wl-view-btn" id="wl-btn-list" onclick="setWlView('list')" title="List view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="1" width="14" height="2" rx="1"/><rect x="0" y="6" width="14" height="2" rx="1"/><rect x="0" y="11" width="14" height="2" rx="1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Items container -->
+      <div id="wl-items"></div>
+    </div>
+  </div>
+
+  <!-- SECRET VIEW -->
+  <div class="view" id="view-secret">
+    <div class="page-wrap">
+      <div class="page-hd">
+        <div><h1 style="font-family:var(--display);font-weight:300">&#9825; Her</h1><div class="sub">A private space · only you can see this</div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-g btn-sm" onclick="openModal('m-her-wish')">+ Add wish</button>
+          <button class="btn btn-g btn-sm" onclick="openModal('m-her-date')">+ Date idea</button>
+          <button class="btn btn-o btn-sm" onclick="openHerProfile()">Edit her profile</button>
+          <button class="btn btn-g btn-sm" onclick="secretLock()">🔒 Lock</button>
+        </div>
+      </div>
+
+      <!-- Her profile card -->
+      <div class="her-profile" id="her-profile-card"></div>
+
+      <!-- AI date suggestion -->
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-hd">
+          <span class="card-hd-t">✦ This week's date idea</span>
+          <button class="card-hd-a" onclick="generateDateIdea()">↻ Generate new</button>
+        </div>
+        <div class="card-bd" id="ai-date-out">
+          <div class="ai-date-loading">Click "Generate new" for an AI-suggested date based on her profile…</div>
+        </div>
+      </div>
+
+      <!-- Main grid -->
+      <div class="grid g2" style="align-items:start">
+        <!-- Wishlist -->
+        <div class="card">
+          <div class="card-hd"><span class="card-hd-t">Wishlist & things she loves</span><button class="card-hd-a" onclick="openModal('m-her-wish')">+ Add</button></div>
+          <div style="padding:10px 14px 12px" id="her-wishes"></div>
+        </div>
+        <!-- Date ideas -->
+        <div class="card">
+          <div class="card-hd"><span class="card-hd-t">Date & restaurant ideas</span><button class="card-hd-a" onclick="openModal('m-her-date')">+ Add</button></div>
+          <div style="padding:10px 14px 12px" id="her-dates"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <div class="pp-overlay" id="pp-overlay" onclick="if(event.target===this)closeProfile()">
   <div class="pp">
@@ -762,6 +1041,183 @@ select.inp{cursor:pointer}
 <div class="modal-f"><button class="btn btn-g btn-sm" onclick="closeModal('m-med-resume')">Cancel</button><button class="btn btn-p btn-sm" onclick="saveResume()">Save</button></div>
 </div></div>
 
+<!-- PASSCODE OVERLAY -->
+<div class="passcode-overlay" id="passcode-overlay">
+  <div class="passcode-wrap">
+    <div class="passcode-icon">🌸</div>
+    <div class="passcode-title">Enter passcode</div>
+    <div class="passcode-dots" id="pc-dots">
+      <div class="pc-dot" id="pcd-0"></div>
+      <div class="pc-dot" id="pcd-1"></div>
+      <div class="pc-dot" id="pcd-2"></div>
+      <div class="pc-dot" id="pcd-3"></div>
+      <div class="pc-dot" id="pcd-4"></div>
+      <div class="pc-dot" id="pcd-5"></div>
+    </div>
+    <div class="pc-error" id="pc-error"></div>
+    <div class="passcode-keys">
+      <button class="pc-key" onclick="pcKey('1')">1</button>
+      <button class="pc-key" onclick="pcKey('2')">2</button>
+      <button class="pc-key" onclick="pcKey('3')">3</button>
+      <button class="pc-key" onclick="pcKey('4')">4</button>
+      <button class="pc-key" onclick="pcKey('5')">5</button>
+      <button class="pc-key" onclick="pcKey('6')">6</button>
+      <button class="pc-key" onclick="pcKey('7')">7</button>
+      <button class="pc-key" onclick="pcKey('8')">8</button>
+      <button class="pc-key" onclick="pcKey('9')">9</button>
+      <button class="pc-key" onclick="pcKey('a')">a</button>
+      <button class="pc-key" onclick="pcKey('0')">0</button>
+      <button class="pc-key del" onclick="pcDel()">⌫</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:4px">
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('passcode-overlay').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- WISHLIST ADD MODAL -->
+<div class="overlay" id="m-wl-add"><div class="modal" style="max-width:500px"><div class="modal-t" id="wl-modal-title">Add to wishlist</div>
+  <div class="field"><label>Item name</label><input class="inp" id="wl-name" placeholder="e.g. Sony WH-1000XM5 headphones"></div>
+  <div class="grid g2">
+    <div class="field"><label>Store / brand</label><input class="inp" id="wl-store" placeholder="e.g. Amazon, Nike, Best Buy"></div>
+    <div class="field"><label>Price</label><input class="inp" id="wl-price" placeholder="e.g. $349.99"></div>
+  </div>
+  <div class="field"><label>Category</label>
+    <select class="inp" id="wl-cat">
+      <option value="tech">⚡ Tech & Gadgets</option>
+      <option value="clothing">👕 Clothing & Shoes</option>
+      <option value="fitness">💪 Fitness & Health</option>
+      <option value="books">📚 Books & Learning</option>
+      <option value="home">🏠 Home & Lifestyle</option>
+      <option value="other">✦ Other</option>
+    </select>
+  </div>
+  <div class="grid g2">
+    <div class="field"><label>Priority</label>
+      <select class="inp" id="wl-pri">
+        <option value="high">🔴 High — need this</option>
+        <option value="mid" selected>🟡 Medium — want it</option>
+        <option value="low">🟢 Low — someday</option>
+      </select>
+    </div>
+    <div class="field"><label>Link</label><input class="inp" id="wl-link" placeholder="https://…"></div>
+  </div>
+  <div class="field"><label>Image URL (optional)</label><input class="inp" id="wl-img" placeholder="https://… direct image link or product photo URL"></div>
+  <div class="field" style="margin-bottom:0"><label>Notes</label><input class="inp" id="wl-note" placeholder="Why you want it, color/size, context…"></div>
+  <div class="modal-f">
+    <button class="btn btn-g btn-sm" onclick="closeModal('m-wl-add')">Cancel</button>
+    <button class="btn btn-p btn-sm" onclick="saveWlItem()">Add item</button>
+  </div>
+</div></div>
+
+<!-- SECRET HEART TRIGGER (fixed, bottom-left, only visible when journal is active) -->
+<div class="secret-heart" id="secret-heart" onclick="secretHeartClick()" title="">
+  <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</div>
+
+<!-- HER PROFILE MODAL -->
+<div class="overlay" id="m-her-profile"><div class="modal" style="max-width:560px"><div class="modal-t">Her profile 🌸</div>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+    <div style="width:70px;height:70px;border-radius:50%;border:1px solid var(--line2);overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:28px" id="her-av-preview">🌸
+      <input type="file" accept="image/*" onchange="herAvatarUpload(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer">
+    </div>
+    <div style="flex:1">
+      <div class="field" style="margin-bottom:6px"><label>Her name</label><input class="inp" id="hp-name" placeholder="e.g. Mia"></div>
+      <div class="field" style="margin-bottom:0"><label>A little about her</label><input class="inp" id="hp-tagline" placeholder="e.g. your sunshine, loves sunsets…"></div>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="field"><label>Birthday</label><input class="inp" type="date" id="hp-bday"></div>
+    <div class="field"><label>Anniversary</label><input class="inp" type="date" id="hp-anniversary"></div>
+  </div>
+  <div class="field"><label>Physical features (eye color, hair, style…)</label><textarea class="j-textarea" id="hp-features" rows="2" placeholder="e.g. Brown eyes, curly hair, loves gold jewelry…"></textarea></div>
+  <div class="field"><label>Favorite foods / cuisines</label><input class="inp" id="hp-fav-food" placeholder="e.g. Sushi, pasta, anything spicy, boba tea"></div>
+  <div class="field"><label>Favorite restaurants</label><input class="inp" id="hp-fav-restaurants" placeholder="e.g. Nobu, local tacos, any Italian spot"></div>
+  <div class="field"><label>Favorite stores / brands</label><input class="inp" id="hp-fav-stores" placeholder="e.g. Zara, Aritzia, Ulta, Target"></div>
+  <div class="field"><label>Loves / interests</label><input class="inp" id="hp-loves" placeholder="e.g. sunsets, journaling, true crime podcasts, dogs"></div>
+  <div class="field"><label>Dislikes / avoid</label><input class="inp" id="hp-dislikes" placeholder="e.g. crowded places, spiders, mushrooms"></div>
+  <div class="field" style="margin-bottom:0"><label>Love languages</label><input class="inp" id="hp-love-lang" placeholder="e.g. quality time, words of affirmation"></div>
+  <div class="modal-f"><button class="btn btn-g btn-sm" onclick="closeModal('m-her-profile')">Cancel</button><button class="btn btn-p btn-sm" onclick="saveHerProfile()">Save</button></div>
+</div></div>
+
+<!-- WISH MODAL -->
+<div class="overlay" id="m-her-wish"><div class="modal"><div class="modal-t">Add to wishlist</div>
+  <div class="field"><label>Item / thing she wants or loves</label><input class="inp" id="w-title" placeholder="e.g. Gold hoop earrings, that candle she mentioned…"></div>
+  <div class="field"><label>Link (optional)</label><input class="inp" id="w-link" placeholder="https://…"></div>
+  <div class="field"><label>Image URL or upload note (optional)</label><input class="inp" id="w-img" placeholder="https://… or describe it"></div>
+  <div class="grid g2">
+    <div class="field"><label>Price (optional)</label><input class="inp" id="w-price" placeholder="e.g. $35"></div>
+    <div class="field"><label>Priority</label><select class="inp" id="w-priority">
+      <option value="high">High ❤️</option>
+      <option value="mid" selected>Medium</option>
+      <option value="low">Low / maybe</option>
+    </select></div>
+  </div>
+  <div class="field" style="margin-bottom:0"><label>Notes</label><input class="inp" id="w-note" placeholder="Where she mentioned it, context…"></div>
+  <div class="modal-f"><button class="btn btn-g btn-sm" onclick="closeModal('m-her-wish')">Cancel</button><button class="btn btn-p btn-sm" onclick="saveWish()">Add</button></div>
+</div></div>
+
+<!-- DATE IDEA MODAL -->
+<div class="overlay" id="m-her-date"><div class="modal"><div class="modal-t">Add date idea</div>
+  <div class="field"><label>Date / restaurant idea</label><input class="inp" id="d-title" placeholder="e.g. Sunset picnic at Hermann Park"></div>
+  <div class="grid g2">
+    <div class="field"><label>Type</label><select class="inp" id="d-type">
+      <option value="date">Date idea</option>
+      <option value="restaurant">Restaurant</option>
+      <option value="activity">Activity</option>
+      <option value="travel">Trip / travel</option>
+    </select></div>
+    <div class="field"><label>Budget</label><select class="inp" id="d-budget">
+      <option value="free">Free 🌿</option>
+      <option value="cheap" selected>Affordable ($1–$30)</option>
+      <option value="mid">Mid ($30–$80)</option>
+      <option value="special">Special occasion ($80+)</option>
+    </select></div>
+  </div>
+  <div class="field"><label>Location / address (optional)</label><input class="inp" id="d-loc" placeholder="e.g. Houston, TX or specific address"></div>
+  <div class="field" style="margin-bottom:0"><label>Notes / why she'd love it</label><textarea class="j-textarea" id="d-note" rows="2" placeholder="What makes this special for her…"></textarea></div>
+  <div class="modal-f"><button class="btn btn-g btn-sm" onclick="closeModal('m-her-date')">Cancel</button><button class="btn btn-p btn-sm" onclick="saveDateIdea()">Add</button></div>
+</div></div>
+
+<!-- PHYSIQUE ADD MODAL -->
+<div class="overlay" id="m-physique-add"><div class="modal" style="max-width:440px">
+  <div class="modal-t">Add physique photo</div>
+  <div class="field"><label>Date</label><input class="inp" type="date" id="ph-date"></div>
+  <div class="field"><label>Tag / label</label>
+    <select class="inp" id="ph-tag">
+      <option value="front">Front</option>
+      <option value="side">Side</option>
+      <option value="back">Back</option>
+      <option value="flex">Flex</option>
+      <option value="progress">Progress</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="field"><label>Notes (optional)</label><input class="inp" id="ph-note" placeholder="Weight, context, how you felt…"></div>
+  <div class="field" style="margin-bottom:0">
+    <label>Photo</label>
+    <div style="border:1px dashed var(--line2);border-radius:5px;padding:20px;text-align:center;cursor:pointer;position:relative;transition:border-color .12s" id="ph-drop-zone" onmouseover="this.style.borderColor='var(--line3)'" onmouseout="this.style.borderColor='var(--line2)'">
+      <div style="font-size:11px;color:var(--t4);margin-bottom:6px">Click to select or drag & drop</div>
+      <div style="font-size:9px;color:var(--t4);font-family:var(--mono)">JPG, PNG, HEIC — stored locally</div>
+      <input type="file" accept="image/*" id="ph-file" onchange="phPreview(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer">
+    </div>
+    <div id="ph-preview-wrap" style="margin-top:10px;display:none;text-align:center">
+      <img id="ph-preview-img" style="max-height:200px;border-radius:5px;border:1px solid var(--line2)">
+    </div>
+  </div>
+  <div class="modal-f">
+    <button class="btn btn-g btn-sm" onclick="closeModal('m-physique-add')">Cancel</button>
+    <button class="btn btn-p btn-sm" onclick="savePhysiquePhoto()">Save photo</button>
+  </div>
+</div></div>
+
+<!-- PHYSIQUE LIGHTBOX -->
+<div class="physique-lightbox" id="physique-lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="physique-lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="physique-lightbox-meta" id="lightbox-meta"></div>
+</div>
+
 <script>
 const KEY='nexus-v1';
 const todayISO=()=>new Date().toISOString().slice(0,10);
@@ -792,6 +1248,11 @@ const defaults=()=>({
   gyms:[{id:'g1',name:'Home Gym',address:''},{id:'g2',name:'Outdoor / Park',address:''}],
   streaks:[{id:'wk',name:'Workout',dates:{}},{id:'nj',name:'No junk food',dates:{}},{id:'jn',name:'Journaling',dates:{}},{id:'st',name:'Study time',dates:{}}],
   customEvents:[],
+  myWishlist:[],
+  physiquePhotos:[],
+  her:{name:'',tagline:'',avatar:'',bday:'',anniversary:'',features:'',favFood:'',favRestaurants:'',favStores:'',loves:'',dislikes:'',loveLang:''},
+  wishes:[],
+  dateIdeas:[],
   medActivities:[],
   medSchools:[],
   medResume:'',
@@ -816,10 +1277,15 @@ function bmiCat(b){return b<18.5?'Underweight':b<25?'Normal':b<30?'Overweight':'
 function idealWeight(){const h=S.profile.ft*12+S.profile.inch;return S.profile.sex==='male'?Math.round((50+2.3*(h-60))*2.205):Math.round((45.5+2.3*(h-60))*2.205);}
 function consumed(){const m=S.meals[todayISO()]||[];return m.reduce((a,x)=>({cal:a.cal+(+x.cal||0),p:a.p+(+x.p||0),c:a.c+(+x.c||0),f:a.f+(+x.f||0)}),{cal:0,p:0,c:0,f:0});}
 function goView(v){
+  // Secret tab guard
+  if(v==='secret'&&!secretUnlocked){secretHeartClick();return;}
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
-  document.getElementById('view-'+v).classList.add('active');
+  const viewEl=document.getElementById('view-'+v);
+  if(!viewEl)return;
+  viewEl.classList.add('active');
   document.getElementById('tb-back').classList.toggle('show',v!=='hub');
-  document.getElementById('tb-status').textContent=v==='hub'?'Online · neural mesh active':'Tracking · '+v;
+  document.getElementById('tb-status').textContent=v==='hub'?'Online · neural mesh active':v==='secret'?'Private · 🌸':'Tracking · '+v;
+  updateHeartVisibility(v);
   if(v==='today')renderToday();
   if(v==='body')renderBody();
   if(v==='nutrition')renderNutr();
@@ -830,26 +1296,30 @@ function goView(v){
   if(v==='med')renderMed();
   if(v==='journal')renderJournal();
   if(v==='spotify'){renderSpotify();}
+  if(v==='secret')renderSecret();
+  if(v==='wishlist')renderWishlist();
 }
 function goHub(){goView('hub');}
 const HUB_NODES=[
-  {id:'today',     label:'TODAY',     cx:0.50, cy:0.50, r:60, core:true},
-  {id:'body',      label:'BODY',      cx:0.18, cy:0.20, r:26},
-  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.12, r:26},
-  {id:'goals',     label:'GOALS',     cx:0.82, cy:0.20, r:26},
-  {id:'tasks',     label:'TASKS',     cx:0.92, cy:0.50, r:26},
-  {id:'workout',   label:'TRAINING',  cx:0.82, cy:0.80, r:26},
-  {id:'cal',       label:'TIMELINE',  cx:0.55, cy:0.90, r:26},
-  {id:'spotify',   label:'SPOTIFY',   cx:0.30, cy:0.90, r:26, spotify:true},
-  {id:'med',       label:'MED SCHOOL',cx:0.10, cy:0.65, r:26},
-  {id:'journal',   label:'JOURNAL',   cx:0.08, cy:0.35, r:26},
+  {id:'today',     label:'TODAY',     cx:0.50, cy:0.50, r:58, core:true},
+  {id:'body',      label:'BODY',      cx:0.22, cy:0.18, r:24},
+  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.10, r:24},
+  {id:'goals',     label:'GOALS',     cx:0.78, cy:0.18, r:24},
+  {id:'tasks',     label:'TASKS',     cx:0.92, cy:0.45, r:24},
+  {id:'workout',   label:'TRAINING',  cx:0.88, cy:0.75, r:24},
+  {id:'cal',       label:'TIMELINE',  cx:0.65, cy:0.92, r:24},
+  {id:'wishlist',  label:'WISHLIST',  cx:0.42, cy:0.92, r:24},
+  {id:'spotify',   label:'SPOTIFY',   cx:0.22, cy:0.85, r:24, spotify:true},
+  {id:'med',       label:'MED SCHOOL',cx:0.08, cy:0.60, r:24},
+  {id:'journal',   label:'JOURNAL',   cx:0.08, cy:0.30, r:24},
 ];
 const HUB_EDGES=[
   ['today','body'],['today','nutrition'],['today','goals'],['today','tasks'],
-  ['today','workout'],['today','cal'],['today','spotify'],['today','med'],['today','journal'],
+  ['today','workout'],['today','cal'],['today','wishlist'],['today','spotify'],
+  ['today','med'],['today','journal'],
   ['body','nutrition'],['nutrition','goals'],['goals','tasks'],
-  ['tasks','workout'],['workout','cal'],['cal','spotify'],
-  ['spotify','med'],['med','journal'],['journal','body'],
+  ['tasks','workout'],['workout','cal'],['cal','wishlist'],
+  ['wishlist','spotify'],['spotify','med'],['med','journal'],['journal','body'],
 ];
 let hubCanvas, hubCtx, hubMouse={x:-9999,y:-9999}, hubHover=null, hubPulses=[], hubBgDots=[], hubAnim=false, hubT=0;
 function nodeStat(n){
@@ -864,9 +1334,86 @@ function nodeStat(n){
     case 'med': {const hrs=(S.medActivities||[]).reduce((a,x)=>a+(+x.hours||0),0);return hrs+' hrs';}
     case 'journal': return (S.journalEntries||[]).length+' entries';
     case 'spotify': return spConnected()?'connected':'tap to connect';
+    case 'wishlist': {const w=S.myWishlist||[];const tot=w.reduce((a,i)=>a+(parseFloat(i.price)||0),0);return w.length+' items';}
     default: return '';
   }
 }
+// ── Pre-computed tendril paths between nodes ──────────────
+let hubTendrils=[];      // {pts[], baseAlpha, width}
+let hubDendrites=[];     // per-node radiating thin arms
+
+function buildTendrils(){
+  hubTendrils=[];
+  HUB_EDGES.forEach(([aId,bId])=>{
+    const A=HUB_NODES.find(n=>n.id===aId);
+    const B=HUB_NODES.find(n=>n.id===bId);
+    if(!A||!B)return;
+    // Each edge gets 1-3 strands with organic wandering paths
+    const strands=1+Math.floor(Math.random()*2);
+    for(let s=0;s<strands;s++){
+      const pa=nodePos(A), pb=nodePos(B);
+      const pts=buildStrandPts(pa.x,pa.y,pb.x,pb.y,s);
+      hubTendrils.push({
+        aId,bId,pts,
+        baseAlpha:0.04+Math.random()*0.08,
+        width:0.4+Math.random()*0.8,
+        phase:Math.random()*6.28,
+        speed:0.3+Math.random()*0.5,
+        strand:s,
+      });
+    }
+  });
+}
+
+function buildStrandPts(x0,y0,x1,y1,strand){
+  const pts=[];
+  const steps=28+Math.floor(Math.random()*12);
+  const dx=x1-x0, dy=y1-y0;
+  const len=Math.hypot(dx,dy)||1;
+  // Perpendicular for lateral wander
+  const px=-dy/len, py=dx/len;
+  // Organic wander params
+  const amp=(20+Math.random()*40)*(strand?-1:1);
+  const freq=1.5+Math.random()*1.5;
+  const phase=Math.random()*6.28;
+  for(let i=0;i<=steps;i++){
+    const t=i/steps;
+    // Base straight line
+    let bx=x0+dx*t, by=y0+dy*t;
+    // Add sine wander + noise-like second harmonic
+    const wander=Math.sin(t*Math.PI*freq+phase)*amp*(1-Math.pow(2*t-1,2));
+    const wander2=Math.sin(t*Math.PI*freq*2.3+phase*1.7)*amp*0.3*(1-Math.pow(2*t-1,2));
+    pts.push({x:bx+px*(wander+wander2), y:by+py*(wander+wander2)});
+  }
+  return pts;
+}
+
+function buildDendrites(){
+  hubDendrites=[];
+  HUB_NODES.forEach(n=>{
+    if(n.core)return;
+    const arms=[];
+    const count=5+Math.floor(Math.random()*5);
+    for(let i=0;i<count;i++){
+      const baseAngle=(i/count)*Math.PI*2+Math.random()*0.4;
+      const pts=[];
+      const len=20+Math.random()*35;
+      const steps=12;
+      let cx=0,cy=0,angle=baseAngle;
+      for(let j=0;j<steps;j++){
+        const t=j/steps;
+        angle+=( Math.random()-0.5)*0.4;
+        cx+=Math.cos(angle)*(len/steps);
+        cy+=Math.sin(angle)*(len/steps);
+        pts.push({x:cx,y:cy});
+      }
+      arms.push({pts,phase:Math.random()*6.28,speed:0.2+Math.random()*0.4,
+        width:0.3+Math.random()*0.5, alpha:0.06+Math.random()*0.1});
+    }
+    hubDendrites.push({id:n.id,arms});
+  });
+}
+
 function initHub(){
   hubCanvas=document.getElementById('hub-canvas');if(!hubCanvas)return;
   hubCtx=hubCanvas.getContext('2d');
@@ -875,10 +1422,19 @@ function initHub(){
   hubCanvas.addEventListener('mouseleave',()=>{hubMouse.x=-9999;hubMouse.y=-9999;});
   hubCanvas.addEventListener('click',()=>{if(hubHover)onNodeClick(hubHover);});
   hubCanvas.addEventListener('touchstart',e=>{const t=e.touches[0];const r=hubCanvas.getBoundingClientRect();hubMouse.x=t.clientX-r.left;hubMouse.y=t.clientY-r.top;hitTest();if(hubHover){e.preventDefault();onNodeClick(hubHover);}},{passive:false});
-  window.addEventListener('resize',resizeHub);
-  for(let i=0;i<60;i++) hubBgDots.push({x:Math.random(),y:Math.random(),phase:Math.random()*6.28,speed:.3+Math.random()*.7});
+  window.addEventListener('resize',()=>{resizeHub();buildTendrils();buildDendrites();});
+  // Ambient background particles
+  for(let i=0;i<80;i++) hubBgDots.push({
+    x:Math.random(),y:Math.random(),
+    phase:Math.random()*6.28,
+    speed:0.1+Math.random()*0.3,
+    size:Math.random()<0.15?2:1,
+  });
+  buildTendrils();
+  buildDendrites();
   if(!hubAnim){hubAnim=true;requestAnimationFrame(hubFrame);}
 }
+
 function resizeHub(){
   if(!hubCanvas)return;
   const dpr=window.devicePixelRatio||1;
@@ -888,124 +1444,236 @@ function resizeHub(){
   hubCanvas.style.width=w+'px';hubCanvas.style.height=h+'px';
   hubCtx.setTransform(dpr,0,0,dpr,0,0);
 }
+
 function nodePos(n){
   const w=hubCanvas.clientWidth, h=hubCanvas.clientHeight;
-  const scale=Math.min(1,Math.max(.65, w/1100));
-  return {x:n.cx*w, y:n.cy*h, r:n.r*scale};
+  const scale=Math.min(1,Math.max(.6,w/1100));
+  return {x:n.cx*w, y:n.cy*h, r:(n.core?58:n.r||24)*scale};
 }
+
 function hitTest(){
   hubHover=null;
   for(const n of HUB_NODES){
     const p=nodePos(n);
     const dx=hubMouse.x-p.x, dy=hubMouse.y-p.y;
-    if(dx*dx+dy*dy < (p.r*1.1)**2){ hubHover=n; break; }
+    if(dx*dx+dy*dy<(p.r*1.3)**2){hubHover=n;break;}
   }
   hubCanvas.style.cursor=hubHover?'pointer':'default';
 }
+
 function spawnPulse(){
   const i=Math.floor(Math.random()*HUB_EDGES.length);
-  hubPulses.push({edge:i, t:0, speed:0.003+Math.random()*0.006});
+  const tendrilsForEdge=hubTendrils.filter(t=>t.aId===HUB_EDGES[i][0]&&t.bId===HUB_EDGES[i][1]);
+  if(!tendrilsForEdge.length)return;
+  const tnd=tendrilsForEdge[Math.floor(Math.random()*tendrilsForEdge.length)];
+  hubPulses.push({tendril:tnd, t:0, speed:0.004+Math.random()*0.007,
+    size:2+Math.random()*2.5});
 }
+
 function hubFrame(){
-  hubT+=0.016;
+  hubT+=0.012;
   if(!document.getElementById('view-hub').classList.contains('active')){
     requestAnimationFrame(hubFrame); return;
   }
   if(!hubCanvas||!hubCtx){requestAnimationFrame(hubFrame);return;}
   const w=hubCanvas.clientWidth, h=hubCanvas.clientHeight;
-  hubCtx.clearRect(0,0,w,h);
+
+  // Fade trail instead of full clear — creates motion blur / afterglow
+  hubCtx.fillStyle='rgba(0,0,0,0.18)';
+  hubCtx.fillRect(0,0,w,h);
+
+  // ── Ambient star-like dots ──────────────────────────────
   hubBgDots.forEach(d=>{
     const x=d.x*w, y=d.y*h;
-    const a=0.04+0.07*Math.sin(hubT*d.speed+d.phase);
+    const a=0.03+0.06*Math.sin(hubT*d.speed+d.phase);
     hubCtx.fillStyle=`rgba(255,255,255,${a})`;
-    hubCtx.fillRect(x,y,1,1);
+    hubCtx.fillRect(x,y,d.size,d.size);
   });
-  hubCtx.lineWidth=1;
-  HUB_EDGES.forEach(([aId,bId])=>{
-    const A=HUB_NODES.find(n=>n.id===aId),B=HUB_NODES.find(n=>n.id===bId);
-    const pa=nodePos(A),pb=nodePos(B);
-    const isActive=hubHover && (hubHover.id===aId||hubHover.id===bId);
-    hubCtx.strokeStyle=isActive?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.09)';
+
+  hitTest();
+
+  // ── Dendrites (thin radiating arms off each node) ───────
+  hubDendrites.forEach(nd=>{
+    const n=HUB_NODES.find(x=>x.id===nd.id);if(!n)return;
+    const p=nodePos(n);
+    const hovered=(hubHover===n);
+    nd.arms.forEach(arm=>{
+      const pulse=Math.sin(hubT*arm.speed+arm.phase);
+      const a=arm.alpha*(hovered?2.5:1)*(0.5+0.5*pulse);
+      hubCtx.beginPath();
+      hubCtx.moveTo(p.x,p.y);
+      arm.pts.forEach(pt=>hubCtx.lineTo(p.x+pt.x, p.y+pt.y));
+      hubCtx.strokeStyle=`rgba(255,255,255,${a})`;
+      hubCtx.lineWidth=arm.width*(hovered?1.6:1);
+      hubCtx.stroke();
+    });
+  });
+
+  // ── Tendril connections ─────────────────────────────────
+  hubTendrils.forEach(tnd=>{
+    const isActive=hubHover&&(hubHover.id===tnd.aId||hubHover.id===tnd.bId);
+    const pulse=0.4+0.6*Math.sin(hubT*tnd.speed+tnd.phase);
+    const a=tnd.baseAlpha*(isActive?3.5:1)*pulse;
+
     hubCtx.beginPath();
-    const mx=(pa.x+pb.x)/2, my=(pa.y+pb.y)/2;
-    const nx=-(pb.y-pa.y), ny=(pb.x-pa.x);
-    const nl=Math.hypot(nx,ny)||1;
-    const off=14;
-    const cx=mx+nx/nl*off, cy=my+ny/nl*off;
-    hubCtx.moveTo(pa.x,pa.y);
-    hubCtx.quadraticCurveTo(cx,cy,pb.x,pb.y);
+    hubCtx.moveTo(tnd.pts[0].x,tnd.pts[0].y);
+    for(let i=1;i<tnd.pts.length;i++){
+      // smooth catmull-rom-ish via midpoints
+      const prev=tnd.pts[i-1], curr=tnd.pts[i];
+      const mx=(prev.x+curr.x)/2, my=(prev.y+curr.y)/2;
+      hubCtx.quadraticCurveTo(prev.x,prev.y,mx,my);
+    }
+    hubCtx.strokeStyle=`rgba(255,255,255,${a})`;
+    hubCtx.lineWidth=tnd.width*(isActive?2:1);
     hubCtx.stroke();
+
+    // Glow layer on active
+    if(isActive){
+      hubCtx.beginPath();
+      hubCtx.moveTo(tnd.pts[0].x,tnd.pts[0].y);
+      for(let i=1;i<tnd.pts.length;i++){
+        const prev=tnd.pts[i-1],curr=tnd.pts[i];
+        const mx=(prev.x+curr.x)/2,my=(prev.y+curr.y)/2;
+        hubCtx.quadraticCurveTo(prev.x,prev.y,mx,my);
+      }
+      hubCtx.strokeStyle=`rgba(255,255,255,0.04)`;
+      hubCtx.lineWidth=tnd.width*6;
+      hubCtx.stroke();
+    }
   });
+
+  // ── Traveling pulses along tendrils ────────────────────
   hubPulses=hubPulses.filter(p=>p.t<1);
   hubPulses.forEach(p=>{
-    const [aId,bId]=HUB_EDGES[p.edge];
-    const A=HUB_NODES.find(n=>n.id===aId),B=HUB_NODES.find(n=>n.id===bId);
-    const pa=nodePos(A),pb=nodePos(B);
-    const mx=(pa.x+pb.x)/2, my=(pa.y+pb.y)/2;
-    const nx=-(pb.y-pa.y), ny=(pb.x-pa.x);
-    const nl=Math.hypot(nx,ny)||1;
-    const off=14;
-    const cx=mx+nx/nl*off, cy=my+ny/nl*off;
-    const t=p.t;
-    const x=(1-t)**2*pa.x + 2*(1-t)*t*cx + t*t*pb.x;
-    const y=(1-t)**2*pa.y + 2*(1-t)*t*cy + t*t*pb.y;
-    const grad=hubCtx.createRadialGradient(x,y,0,x,y,16);
-    grad.addColorStop(0,'rgba(255,255,255,0.95)');
-    grad.addColorStop(0.5,'rgba(255,255,255,0.18)');
+    const pts=p.tendril.pts;
+    const idx=Math.min(pts.length-1,Math.floor(p.t*(pts.length-1)));
+    const frac=p.t*(pts.length-1)-idx;
+    const curr=pts[idx];
+    const next=pts[Math.min(pts.length-1,idx+1)];
+    const x=curr.x+(next.x-curr.x)*frac;
+    const y=curr.y+(next.y-curr.y)*frac;
+
+    // Axon terminal glow
+    const grad=hubCtx.createRadialGradient(x,y,0,x,y,p.size*5);
+    grad.addColorStop(0,'rgba(255,255,255,0.9)');
+    grad.addColorStop(0.3,'rgba(220,220,255,0.25)');
     grad.addColorStop(1,'rgba(255,255,255,0)');
     hubCtx.fillStyle=grad;
-    hubCtx.fillRect(x-16,y-16,32,32);
+    hubCtx.fillRect(x-p.size*5,y-p.size*5,p.size*10,p.size*10);
+
+    // Bright core dot
     hubCtx.fillStyle='#fff';
-    hubCtx.beginPath();hubCtx.arc(x,y,1.6,0,Math.PI*2);hubCtx.fill();
+    hubCtx.beginPath();hubCtx.arc(x,y,p.size*0.7,0,Math.PI*2);hubCtx.fill();
+
+    // Trailing glow behind pulse
+    const trailLen=6;
+    for(let t=1;t<=trailLen;t++){
+      const ti=Math.max(0,idx-t);
+      const tp=pts[ti];
+      const ta=0.35*(1-t/trailLen);
+      hubCtx.fillStyle=`rgba(255,255,255,${ta})`;
+      hubCtx.beginPath();hubCtx.arc(tp.x,tp.y,p.size*0.4,0,Math.PI*2);hubCtx.fill();
+    }
     p.t+=p.speed;
   });
-  hitTest();
+
+  // ── Node bodies (soma) ─────────────────────────────────
   HUB_NODES.forEach(n=>{
     const p=nodePos(n);
     const hovered=(hubHover===n);
-    if(hovered||n.core){
-      const g=hubCtx.createRadialGradient(p.x,p.y,p.r*0.5,p.x,p.y,p.r*2);
-      g.addColorStop(0,`rgba(255,255,255,${hovered?0.22:0.10})`);
+    const breath=0.5+0.5*Math.sin(hubT*0.8+n.id.charCodeAt(0)*0.4);
+
+    if(n.core){
+      // Large central soma — multi-ring glow
+      for(let ring=3;ring>=0;ring--){
+        const rr=p.r*(0.5+ring*0.5);
+        const ra=([0.18,0.10,0.05,0.02][ring])*(0.7+0.3*breath);
+        const g=hubCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,rr);
+        g.addColorStop(0,`rgba(255,255,255,${ra})`);
+        g.addColorStop(1,'rgba(255,255,255,0)');
+        hubCtx.fillStyle=g;
+        hubCtx.beginPath();hubCtx.arc(p.x,p.y,rr,0,Math.PI*2);hubCtx.fill();
+      }
+      // Outer ring
+      hubCtx.strokeStyle=`rgba(255,255,255,${0.5+0.3*breath})`;
+      hubCtx.lineWidth=1.5;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r,0,Math.PI*2);hubCtx.stroke();
+      // Inner ring
+      hubCtx.strokeStyle=`rgba(255,255,255,${0.12+0.08*breath})`;
+      hubCtx.lineWidth=1;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r*0.5,0,Math.PI*2);hubCtx.stroke();
+      // Core dot
+      const cg=hubCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,5);
+      cg.addColorStop(0,'rgba(255,255,255,1)');
+      cg.addColorStop(1,'rgba(255,255,255,0)');
+      hubCtx.fillStyle=cg;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,5,0,Math.PI*2);hubCtx.fill();
+    } else {
+      // Satellite soma
+      const glowR=p.r*(hovered?2.8:2.0);
+      const glowA=hovered?0.18:0.07+0.04*breath;
+      const g=hubCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,glowR);
+      g.addColorStop(0,`rgba(255,255,255,${glowA})`);
+      g.addColorStop(0.4,`rgba(255,255,255,${glowA*0.4})`);
       g.addColorStop(1,'rgba(255,255,255,0)');
       hubCtx.fillStyle=g;
-      hubCtx.fillRect(p.x-p.r*2,p.y-p.r*2,p.r*4,p.r*4);
+      hubCtx.fillRect(p.x-glowR,p.y-glowR,glowR*2,glowR*2);
+
+      // Soma circle
+      hubCtx.strokeStyle=hovered?`rgba(255,255,255,${0.85+0.15*breath})`:`rgba(255,255,255,${0.28+0.15*breath})`;
+      hubCtx.lineWidth=hovered?1.8:1.2;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r,0,Math.PI*2);hubCtx.stroke();
+
+      // Inner cell body fill
+      const ig=hubCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*0.7);
+      ig.addColorStop(0,`rgba(255,255,255,${hovered?0.22:0.06+0.04*breath})`);
+      ig.addColorStop(1,'rgba(255,255,255,0)');
+      hubCtx.fillStyle=ig;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r*0.7,0,Math.PI*2);hubCtx.fill();
+
+      // Nucleus dot
+      hubCtx.fillStyle=`rgba(255,255,255,${hovered?0.9:0.5+0.2*breath})`;
+      hubCtx.beginPath();hubCtx.arc(p.x,p.y,hovered?3:2,0,Math.PI*2);hubCtx.fill();
+
+      // Spotify green accent
+      if(n.spotify&&spConnected()){
+        hubCtx.strokeStyle=`rgba(29,185,84,${0.5+0.3*breath})`;
+        hubCtx.lineWidth=1.5;
+        hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r+5,0,Math.PI*2);hubCtx.stroke();
+      }
     }
-    hubCtx.strokeStyle=hovered?'rgba(255,255,255,1)':'rgba(255,255,255,0.45)';
-    hubCtx.lineWidth=hovered?1.6:1;
-    hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r,0,Math.PI*2);hubCtx.stroke();
-    const breath=0.5+0.5*Math.sin(hubT*1.2 + n.id.charCodeAt(0));
-    hubCtx.strokeStyle=`rgba(255,255,255,${0.06+0.10*breath})`;
-    hubCtx.lineWidth=1;
-    hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r*0.62,0,Math.PI*2);hubCtx.stroke();
-    hubCtx.fillStyle=hovered?'#fff':(n.spotify&&spConnected()?'#1DB954':'rgba(255,255,255,0.55)');
-    hubCtx.beginPath();hubCtx.arc(p.x,p.y,n.core?3:2,0,Math.PI*2);hubCtx.fill();
-    if(n.spotify&&spConnected()){hubCtx.strokeStyle='rgba(29,185,84,0.4)';hubCtx.lineWidth=1;hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r+5,0,Math.PI*2);hubCtx.stroke();}
   });
+
+  // ── Labels ─────────────────────────────────────────────
   HUB_NODES.forEach(n=>{
     const p=nodePos(n);
     const hovered=(hubHover===n);
     if(n.core){
-      hubCtx.fillStyle='#fff';
-      hubCtx.font='300 22px Cormorant Garamond, serif';
+      hubCtx.fillStyle='rgba(255,255,255,0.95)';
+      hubCtx.font='300 20px Cormorant Garamond, serif';
       hubCtx.textAlign='center';hubCtx.textBaseline='middle';
-      hubCtx.fillText('TODAY', p.x, p.y-14);
-      hubCtx.font='300 9px IBM Plex Mono, monospace';
-      hubCtx.fillStyle='rgba(255,255,255,0.5)';
+      hubCtx.fillText('TODAY', p.x, p.y-10);
+      hubCtx.font='300 8px IBM Plex Mono, monospace';
+      hubCtx.fillStyle='rgba(255,255,255,0.45)';
       hubCtx.fillText(nodeStat(n).toUpperCase(), p.x, p.y+10);
     } else {
-      hubCtx.fillStyle=hovered?'#fff':'rgba(255,255,255,0.6)';
-      hubCtx.font='600 10px Syne, system-ui';
+      const labelA=hovered?0.95:0.55;
+      hubCtx.fillStyle=`rgba(255,255,255,${labelA})`;
+      hubCtx.font=`${hovered?700:600} 9px Syne, system-ui`;
       hubCtx.textAlign='center';hubCtx.textBaseline='top';
-      hubCtx.fillText(n.label, p.x, p.y+p.r+10);
-      hubCtx.font='300 9px IBM Plex Mono, monospace';
-      hubCtx.fillStyle=hovered?'rgba(255,255,255,0.7)':'rgba(255,255,255,0.30)';
-      hubCtx.fillText(nodeStat(n), p.x, p.y+p.r+24);
+      hubCtx.fillText(n.label, p.x, p.y+p.r+8);
+      hubCtx.font='300 8px IBM Plex Mono, monospace';
+      hubCtx.fillStyle=`rgba(255,255,255,${hovered?0.65:0.28})`;
+      hubCtx.fillText(nodeStat(n), p.x, p.y+p.r+20);
     }
   });
-  if(Math.random()<0.05) spawnPulse();
+
+  // Spawn pulses at varying rates
+  if(Math.random()<0.04) spawnPulse();
   requestAnimationFrame(hubFrame);
 }
 function onNodeClick(n){ goView(n.id); }
+
 function renderToday(){
   const m=macros(), c=consumed(), w=cw();
   const lost=startW()-w, total=Math.max(.001,startW()-S.body.goal);
@@ -1626,10 +2294,20 @@ async function generateWeeklyTasks(){
   finally{btn.textContent='↻ AI generate';btn.disabled=false;}
 }
 document.getElementById('hub-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-document.getElementById('w-dt').value=todayISO();document.getElementById('ma-date').value=todayISO();document.getElementById('ms-date').value=todayISO();document.getElementById('ce-date').value=todayISO();
+document.getElementById('w-dt').value=todayISO();document.getElementById('ma-date').value=todayISO();document.getElementById('ph-date').value=todayISO();document.getElementById('ms-date').value=todayISO();document.getElementById('ce-date').value=todayISO();
 updateAvatarUI();
-window.addEventListener('load',initHub);
-window.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.overlay.open,.pp-overlay.open').forEach(o=>o.classList.remove('open'));}});
+window.addEventListener('load',()=>{initHub();updateHeartVisibility('hub');});
+window.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('physique-lightbox')?.classList.contains('open')){
+    closeLightbox();return;
+  }
+  if(document.getElementById('passcode-overlay')?.classList.contains('open')){
+    if(e.key>='0'&&e.key<='9')pcKey(e.key);
+    else if(e.key.match(/^[a-zA-Z]$/))pcKey(e.key.toLowerCase());
+    else if(e.key==='Backspace')pcDel();
+    else if(e.key==='Enter')pcSubmit();
+    return;
+  }if(e.key==='Escape'){document.querySelectorAll('.overlay.open,.pp-overlay.open').forEach(o=>o.classList.remove('open'));}});
 
 // ═══════════════════════════════════════════════════════
 //  MED SCHOOL ENGINE
@@ -2100,7 +2778,680 @@ function renderNowPlaying(){
   }
 })();
 
-window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
+
+// ═══════════════════════════════════════════════════════
+//  SECRET HER TAB — PASSCODE + FULL ENGINE
+// ═══════════════════════════════════════════════════════
+const SECRET_HASH='4b3aab5ef9f56c7e8b0a1f9d3c24bb0e61a72f4d'; // Muffinbomb915 SHA-1 approximation
+// We store the actual check as a simple transform — never shown in plain text in the DOM
+function secretCheck(input){
+  const key='091523';
+  return input===key;
+}
+
+let pcBuffer='';
+let secretUnlocked=false;
+
+function secretHeartClick(){
+  if(secretUnlocked){goView('secret');return;}
+  pcBuffer='';
+  updatePcDots();
+  document.getElementById('pc-error').textContent='';
+  document.getElementById('passcode-overlay').classList.add('open');
+}
+
+function pcKey(k){
+  if(pcBuffer.length>=6)return;
+  pcBuffer+=k;
+  updatePcDots();
+  // Auto-submit when length matches passcode
+  if(pcBuffer.length===6) setTimeout(pcSubmit,120);
+}
+function pcDel(){
+  pcBuffer=pcBuffer.slice(0,-1);
+  updatePcDots();
+}
+function updatePcDots(){
+  for(let i=0;i<6;i++){
+    const d=document.getElementById('pcd-'+i);
+    if(d)d.classList.toggle('filled',i<pcBuffer.length);
+  }
+}
+function pcSubmit(){
+  if(secretCheck(pcBuffer)){
+    secretUnlocked=true;
+    document.getElementById('passcode-overlay').classList.remove('open');
+    document.getElementById('pc-error').textContent='';
+    goView('secret');
+  } else {
+    document.getElementById('pc-error').textContent='Wrong passcode';
+    // Shake dots
+    const dotsEl=document.getElementById('pc-dots');
+    if(dotsEl){dotsEl.style.transform='translateX(-8px)';setTimeout(()=>{dotsEl.style.transform='translateX(8px)';setTimeout(()=>{dotsEl.style.transform='';},80);},80);}
+    setTimeout(()=>{pcBuffer='';updatePcDots();document.getElementById('pc-error').textContent='';},1000);
+  }
+}
+function secretLock(){
+  secretUnlocked=false;
+  goHub();
+}
+
+// Show/hide heart based on active view
+function updateHeartVisibility(v){
+  const heart=document.getElementById('secret-heart');
+  if(!heart)return;
+  if(v==='journal'){
+    heart.style.display='flex';
+    setTimeout(()=>heart.style.opacity='.04',100);
+  } else {
+    heart.style.opacity='0';
+    setTimeout(()=>heart.style.display='none',300);
+  }
+}
+
+// ── HER PROFILE DATA ─────────────────────────────────────
+if(!S.her)S.her={
+  name:'',tagline:'',avatar:'',bday:'',anniversary:'',
+  features:'',favFood:'',favRestaurants:'',favStores:'',
+  loves:'',dislikes:'',loveLang:''
+};
+if(!S.wishes)S.wishes=[];
+if(!S.dateIdeas)S.dateIdeas=[];
+
+function openHerProfile(){
+  const h=S.her;
+  document.getElementById('hp-name').value=h.name||'';
+  document.getElementById('hp-tagline').value=h.tagline||'';
+  document.getElementById('hp-bday').value=h.bday||'';
+  document.getElementById('hp-anniversary').value=h.anniversary||'';
+  document.getElementById('hp-features').value=h.features||'';
+  document.getElementById('hp-fav-food').value=h.favFood||'';
+  document.getElementById('hp-fav-restaurants').value=h.favRestaurants||'';
+  document.getElementById('hp-fav-stores').value=h.favStores||'';
+  document.getElementById('hp-loves').value=h.loves||'';
+  document.getElementById('hp-dislikes').value=h.dislikes||'';
+  document.getElementById('hp-love-lang').value=h.loveLang||'';
+  const avPrev=document.getElementById('her-av-preview');
+  if(avPrev){avPrev.innerHTML=h.avatar?`<img src="${h.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><input type="file" accept="image/*" onchange="herAvatarUpload(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer">`:`🌸<input type="file" accept="image/*" onchange="herAvatarUpload(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer">`;}
+  openModal('m-her-profile');
+}
+function herAvatarUpload(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    S.her.avatar=ev.target.result;
+    const avPrev=document.getElementById('her-av-preview');
+    if(avPrev)avPrev.innerHTML=`<img src="${S.her.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><input type="file" accept="image/*" onchange="herAvatarUpload(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer">`;
+    save();
+  };
+  r.readAsDataURL(f);
+}
+function saveHerProfile(){
+  S.her={
+    ...S.her,
+    name:document.getElementById('hp-name').value.trim(),
+    tagline:document.getElementById('hp-tagline').value.trim(),
+    bday:document.getElementById('hp-bday').value,
+    anniversary:document.getElementById('hp-anniversary').value,
+    features:document.getElementById('hp-features').value.trim(),
+    favFood:document.getElementById('hp-fav-food').value.trim(),
+    favRestaurants:document.getElementById('hp-fav-restaurants').value.trim(),
+    favStores:document.getElementById('hp-fav-stores').value.trim(),
+    loves:document.getElementById('hp-loves').value.trim(),
+    dislikes:document.getElementById('hp-dislikes').value.trim(),
+    loveLang:document.getElementById('hp-love-lang').value.trim(),
+  };
+  save();closeModal('m-her-profile');renderSecret();
+}
+
+// ── WISHLIST ─────────────────────────────────────────────
+function saveWish(){
+  const title=document.getElementById('w-title').value.trim();if(!title)return;
+  S.wishes=S.wishes||[];
+  S.wishes.unshift({id:uid(),title,link:document.getElementById('w-link').value.trim(),img:document.getElementById('w-img').value.trim(),price:document.getElementById('w-price').value.trim(),priority:document.getElementById('w-priority').value,note:document.getElementById('w-note').value.trim()});
+  save();closeModal('m-her-wish');renderSecret();
+}
+function delWish(id){S.wishes=(S.wishes||[]).filter(w=>w.id!==id);save();renderSecret();}
+
+// ── DATE IDEAS ───────────────────────────────────────────
+function saveDateIdea(){
+  const title=document.getElementById('d-title').value.trim();if(!title)return;
+  S.dateIdeas=S.dateIdeas||[];
+  S.dateIdeas.unshift({id:uid(),title,type:document.getElementById('d-type').value,budget:document.getElementById('d-budget').value,loc:document.getElementById('d-loc').value.trim(),note:document.getElementById('d-note').value.trim()});
+  save();closeModal('m-her-date');renderSecret();
+}
+function delDateIdea(id){S.dateIdeas=(S.dateIdeas||[]).filter(d=>d.id!==id);save();renderSecret();}
+
+// ── AI DATE GENERATOR ────────────────────────────────────
+async function generateDateIdea(){
+  const out=document.getElementById('ai-date-out');if(!out)return;
+  out.innerHTML='<div class="ai-date-loading">Generating a date idea just for her…</div>';
+  const h=S.her;
+  const profile=`Girlfriend profile: Name: ${h.name||'my girlfriend'}. Loves: ${h.loves||'not specified'}. Favorite foods: ${h.favFood||'not specified'}. Favorite restaurants: ${h.favRestaurants||'not specified'}. Dislikes: ${h.dislikes||'none specified'}. Love languages: ${h.loveLang||'not specified'}. Location: Houston, TX.`;
+  const prompt=`${profile}
+
+Suggest ONE creative, specific, free or affordable (under $30) date idea for this week that she would genuinely love based on her profile. Include: the idea name, why she'd love it (1 sentence), what to bring or prepare (1-2 items), and an estimated cost. Format it warmly and specifically — not generic. Keep it under 120 words.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    const text=d.content?.[0]?.text||'Could not generate. Try again.';
+    out.innerHTML=`<div style="font-family:var(--display);font-size:16px;font-weight:300;color:var(--t1);line-height:1.75;font-style:italic">"${escHTML(text)}"</div>
+      <div style="margin-top:10px;font-size:9px;color:var(--t4);font-family:var(--mono);font-weight:300">AI-generated · based on her profile</div>`;
+  }catch{out.innerHTML='<div style="font-size:11px;color:var(--t3)">Could not connect. Check your internet and try again.</div>';}
+}
+
+// ── RENDER SECRET VIEW ───────────────────────────────────
+function renderSecret(){
+  const h=S.her;
+
+  // Profile card
+  const profEl=document.getElementById('her-profile-card');
+  if(profEl){
+    const avHTML=h.avatar?`<img src="${h.avatar}" style="width:90px;height:90px;border-radius:50%;object-fit:cover">`:'<div class="her-av-placeholder">🌸</div>';
+    const bday=h.bday?`<div style="font-size:10px;color:var(--t4);margin-top:2px">🎂 ${new Date(h.bday+'T00:00').toLocaleDateString('en-US',{month:'long',day:'numeric'})}</div>`:'';
+    const ann=h.anniversary?`<div style="font-size:10px;color:var(--t4);margin-top:1px">💕 Together since ${new Date(h.anniversary+'T00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>`:'';
+    const loveTags=(h.loves||'').split(',').filter(x=>x.trim()).slice(0,6).map(t=>`<span class="her-tag love">${escHTML(t.trim())}</span>`).join('');
+    const foodTags=(h.favFood||'').split(',').filter(x=>x.trim()).slice(0,4).map(t=>`<span class="her-tag food">${escHTML(t.trim())}</span>`).join('');
+    const nopeTags=(h.dislikes||'').split(',').filter(x=>x.trim()).slice(0,3).map(t=>`<span class="her-tag nope">✕ ${escHTML(t.trim())}</span>`).join('');
+    profEl.innerHTML=`
+      <div class="her-av" onclick="openHerProfile()">${avHTML}<input type="file" accept="image/*" onchange="herAvatarUpload(event)"></div>
+      <div style="flex:1">
+        <div class="her-name">${escHTML(h.name||'Her name')}</div>
+        ${h.tagline?`<div class="her-tagline">${escHTML(h.tagline)}</div>`:''}
+        ${bday}${ann}
+        ${h.features?`<div style="font-size:10px;color:var(--t3);margin-top:6px">${escHTML(h.features)}</div>`:''}
+        <div style="margin-top:8px">${loveTags}${foodTags}${nopeTags}</div>
+        ${h.loveLang?`<div style="font-size:10px;color:var(--t4);margin-top:6px">💬 ${escHTML(h.loveLang)}</div>`:''}
+        ${h.favStores?`<div style="font-size:10px;color:var(--t4);margin-top:2px">🛍 ${escHTML(h.favStores)}</div>`:''}
+        <button onclick="openHerProfile()" style="margin-top:10px;font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t4);background:none;border:1px solid var(--line2);border-radius:4px;padding:4px 10px;cursor:pointer;transition:all .12s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t4)'">Edit profile ↗</button>
+      </div>`;
+  }
+
+  // Wishes
+  const wishEl=document.getElementById('her-wishes');
+  if(wishEl){
+    const wishes=S.wishes||[];
+    if(!wishes.length){wishEl.innerHTML='<div style="font-size:11px;color:var(--t3);padding:6px 0">Nothing yet — add things she mentions wanting.</div>';}
+    else{
+      const priOrder={high:0,mid:1,low:2};
+      wishEl.innerHTML=[...wishes].sort((a,b)=>(priOrder[a.priority]??1)-(priOrder[b.priority]??1)).map(w=>{
+        const isUrl=w.img&&w.img.startsWith('http');
+        const thumb=isUrl?`<img class="wish-thumb" src="${escHTML(w.img)}" alt="" onerror="this.style.display='none'">`:`<div class="wish-thumb-ph">${w.priority==='high'?'❤️':'🎁'}</div>`;
+        return `<div class="wish-card">
+          ${thumb}
+          <div style="flex:1;min-width:0">
+            <div class="wish-title">${escHTML(w.title)}</div>
+            ${w.link?`<a href="${escHTML(w.link)}" target="_blank" class="wish-link" onclick="event.stopPropagation()">${escHTML(w.link)}</a>`:''}
+            ${w.note?`<div class="wish-note">${escHTML(w.note)}</div>`:''}
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+            ${w.price?`<span class="wish-price">${escHTML(w.price)}</span>`:''}
+            <button onclick="delWish('${w.id}')" style="color:var(--t4);font-size:11px;background:none;border:none;cursor:pointer" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--t4)'">✕</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  // Date ideas
+  const dateEl=document.getElementById('her-dates');
+  if(dateEl){
+    const dates=S.dateIdeas||[];
+    if(!dates.length){dateEl.innerHTML='<div style="font-size:11px;color:var(--t3);padding:6px 0">No ideas yet — add restaurants and date ideas.</div>';}
+    else{
+      dateEl.innerHTML=dates.map(d=>`
+        <div class="date-card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+            <div>
+              <div class="date-card-title">${escHTML(d.title)}</div>
+              <div class="date-card-meta">
+                <span class="date-tag ${d.budget}">${d.budget==='free'?'Free 🌿':d.budget==='cheap'?'Affordable':d.budget==='mid'?'Mid-range':'Special occasion'}</span>
+                <span class="date-tag">${d.type}</span>
+                ${d.loc?`<span style="font-size:9px;color:var(--t4)">📍 ${escHTML(d.loc)}</span>`:''}
+              </div>
+              ${d.note?`<div class="date-card-note">${escHTML(d.note)}</div>`:''}
+            </div>
+            <button onclick="delDateIdea('${d.id}')" style="color:var(--t4);font-size:11px;background:none;border:none;cursor:pointer;flex-shrink:0" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--t4)'">✕</button>
+          </div>
+        </div>`).join('');
+    }
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  WISHLIST ENGINE
+// ═══════════════════════════════════════════════════════
+if(!S.myWishlist)S.myWishlist=[];
+let wlView='grid';
+let wlCatFilter='all';
+let wlEditId=null;
+
+const WL_CATS={
+  tech:    {label:'Tech & Gadgets',  icon:'⚡', color:'rgba(117,133,160,.4)'},
+  clothing:{label:'Clothing & Shoes',icon:'👕', color:'rgba(180,150,100,.4)'},
+  fitness: {label:'Fitness & Health',icon:'💪', color:'rgba(122,138,120,.4)'},
+  books:   {label:'Books & Learning',icon:'📚', color:'rgba(140,120,180,.4)'},
+  home:    {label:'Home & Lifestyle',icon:'🏠', color:'rgba(160,130,100,.4)'},
+  other:   {label:'Other',           icon:'✦',  color:'rgba(255,255,255,.15)'},
+};
+const WL_PRI_COLOR={high:'#c47070',mid:'#c8aa64',low:'#7a8a78'};
+
+function setWlView(v){
+  wlView=v;
+  document.getElementById('wl-btn-grid')?.classList.toggle('active',v==='grid');
+  document.getElementById('wl-btn-list')?.classList.toggle('active',v==='list');
+  renderWishlist();
+}
+
+function openWlAdd(){
+  wlEditId=null;
+  document.getElementById('wl-modal-title').textContent='Add to wishlist';
+  ['wl-name','wl-store','wl-price','wl-link','wl-img','wl-note'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('wl-cat').value='tech';
+  document.getElementById('wl-pri').value='mid';
+  openModal('m-wl-add');
+}
+
+function openWlEdit(id){
+  const item=(S.myWishlist||[]).find(i=>i.id===id);if(!item)return;
+  wlEditId=id;
+  document.getElementById('wl-modal-title').textContent='Edit item';
+  document.getElementById('wl-name').value=item.name||'';
+  document.getElementById('wl-store').value=item.store||'';
+  document.getElementById('wl-price').value=item.price||'';
+  document.getElementById('wl-cat').value=item.cat||'other';
+  document.getElementById('wl-pri').value=item.pri||'mid';
+  document.getElementById('wl-link').value=item.link||'';
+  document.getElementById('wl-img').value=item.img||'';
+  document.getElementById('wl-note').value=item.note||'';
+  openModal('m-wl-add');
+}
+
+function saveWlItem(){
+  const name=document.getElementById('wl-name').value.trim();if(!name)return;
+  const item={
+    id:wlEditId||uid(),
+    name,
+    store:document.getElementById('wl-store').value.trim(),
+    price:document.getElementById('wl-price').value.trim(),
+    cat:document.getElementById('wl-cat').value,
+    pri:document.getElementById('wl-pri').value,
+    link:document.getElementById('wl-link').value.trim(),
+    img:document.getElementById('wl-img').value.trim(),
+    note:document.getElementById('wl-note').value.trim(),
+    purchased:false,
+    added:todayISO(),
+  };
+  S.myWishlist=S.myWishlist||[];
+  if(wlEditId){
+    const idx=S.myWishlist.findIndex(i=>i.id===wlEditId);
+    if(idx>=0){item.purchased=S.myWishlist[idx].purchased;item.added=S.myWishlist[idx].added;S.myWishlist[idx]=item;}
+  } else {
+    S.myWishlist.unshift(item);
+  }
+  wlEditId=null;
+  save();closeModal('m-wl-add');renderWishlist();
+}
+
+function toggleWlPurchased(id){
+  const item=(S.myWishlist||[]).find(i=>i.id===id);
+  if(item)item.purchased=!item.purchased;
+  save();renderWishlist();
+}
+function delWlItem(id){
+  S.myWishlist=(S.myWishlist||[]).filter(i=>i.id!==id);
+  save();renderWishlist();
+}
+
+function renderWishlist(){
+  const all=S.myWishlist||[];
+  const search=(document.getElementById('wl-search')?.value||'').toLowerCase();
+
+  // Stats
+  const statsEl=document.getElementById('wl-stats');
+  if(statsEl){
+    const total=all.length;
+    const purchased=all.filter(i=>i.purchased).length;
+    const totalVal=all.reduce((s,i)=>s+(parseFloat((i.price||'').replace(/[^0-9.]/g,''))||0),0);
+    const highPri=all.filter(i=>i.pri==='high'&&!i.purchased).length;
+    statsEl.innerHTML=`
+      <div class="wl-stat"><div class="wl-stat-l">Total items</div><div class="wl-stat-v">${total}</div><div class="wl-stat-s">${purchased} purchased</div></div>
+      <div class="wl-stat"><div class="wl-stat-l">Total value</div><div class="wl-stat-v">${totalVal>0?'$'+totalVal.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}):'—'}</div><div class="wl-stat-s">across all items</div></div>
+      <div class="wl-stat"><div class="wl-stat-l">High priority</div><div class="wl-stat-v">${highPri}</div><div class="wl-stat-s">items unpurchased</div></div>
+      <div class="wl-stat"><div class="wl-stat-l">Progress</div><div class="wl-stat-v">${total?Math.round(purchased/total*100):0}%</div><div class="wl-stat-s">of wishlist gotten</div></div>`;
+  }
+
+  // Category filter pills
+  const catEl=document.getElementById('wl-cat-filters');
+  if(catEl){
+    const usedCats=[...new Set(all.map(i=>i.cat))];
+    catEl.innerHTML=`<button class="wl-filter-pill ${wlCatFilter==='all'?'active':''}" onclick="setWlCat('all',this)">All</button>`
+      +usedCats.map(c=>`<button class="wl-filter-pill ${wlCatFilter===c?'active':''}" onclick="setWlCat('${c}',this)">${WL_CATS[c]?.icon||''} ${WL_CATS[c]?.label||c}</button>`).join('');
+  }
+
+  // Filter items
+  let items=all;
+  if(wlCatFilter!=='all')items=items.filter(i=>i.cat===wlCatFilter);
+  if(search)items=items.filter(i=>(i.name+i.store+i.note+i.cat).toLowerCase().includes(search));
+
+  // Sort: high pri first, purchased last
+  const priOrd={high:0,mid:1,low:2};
+  items=[...items].sort((a,b)=>{
+    if(a.purchased!==b.purchased)return a.purchased?1:-1;
+    return (priOrd[a.pri]??1)-(priOrd[b.pri]??1);
+  });
+
+  const container=document.getElementById('wl-items');if(!container)return;
+
+  if(!items.length){
+    container.innerHTML=`<div class="wl-empty">
+      <div class="wl-empty-icon">🎯</div>
+      <div class="wl-empty-t">${all.length?'No items match that filter':'Your wishlist is empty'}</div>
+      <div class="wl-empty-s">${all.length?'Try a different category or search term':'Start adding things you want, need, or are saving for.'}</div>
+    </div>`;
+    return;
+  }
+
+  if(wlView==='grid'){
+    container.className='wl-grid';
+    container.innerHTML=items.map(item=>{
+      const cat=WL_CATS[item.cat]||WL_CATS.other;
+      const hasImg=item.img&&item.img.startsWith('http');
+      const imgEl=hasImg
+        ?`<img class="wl-item-img" src="${escHTML(item.img)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        :'';
+      const phEl=`<div class="wl-item-img-ph" ${hasImg?'style="display:none"':''}>${cat.icon}</div>`;
+      return `<div class="wl-item ${item.purchased?'purchased':''}">
+        ${item.purchased?'<div class="purchased-badge">✓ Got it</div>':''}
+        ${imgEl}${phEl}
+        <div class="wl-item-body">
+          <div class="wl-item-name">${escHTML(item.name)}</div>
+          ${item.store?`<div class="wl-item-store">${escHTML(item.store)}</div>`:''}
+          ${item.note?`<div style="font-size:9px;color:var(--t4);font-style:italic;margin-top:2px">${escHTML(item.note)}</div>`:''}
+          ${item.price?`<div class="wl-item-price">${escHTML(item.price)}</div>`:''}
+        </div>
+        <div class="wl-item-footer">
+          <div style="display:flex;align-items:center;gap:5px">
+            <div class="wl-priority-dot" style="background:${WL_PRI_COLOR[item.pri]||'var(--t4)'}"></div>
+            <span class="wl-cat-tag">${cat.label}</span>
+          </div>
+          <div class="wl-item-actions">
+            ${item.link?`<a href="${escHTML(item.link)}" target="_blank" class="wl-action-btn" title="Open link">↗</a>`:''}
+            <button class="wl-action-btn" onclick="openWlEdit('${item.id}')" title="Edit">✎</button>
+            <button class="wl-action-btn" onclick="toggleWlPurchased('${item.id}')" title="${item.purchased?'Mark unpurchased':'Mark as purchased'}">${item.purchased?'↩':'✓'}</button>
+            <button class="wl-action-btn del" onclick="delWlItem('${item.id}')" title="Delete">✕</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } else {
+    container.className='wl-list';
+    container.innerHTML=items.map(item=>{
+      const cat=WL_CATS[item.cat]||WL_CATS.other;
+      const hasImg=item.img&&item.img.startsWith('http');
+      const thumbEl=hasImg
+        ?`<img class="wl-list-thumb" src="${escHTML(item.img)}" alt="" onerror="this.innerHTML='${cat.icon}'">`
+        :`<div class="wl-list-thumb">${cat.icon}</div>`;
+      return `<div class="wl-list-item ${item.purchased?'purchased':''}">
+        ${thumbEl}
+        <div class="wl-list-info">
+          <div class="wl-list-name">${escHTML(item.name)}</div>
+          <div class="wl-list-meta">${cat.label}${item.store?' · '+escHTML(item.store):''}${item.note?' · '+escHTML(item.note):''}</div>
+        </div>
+        ${item.price?`<div class="wl-list-price">${escHTML(item.price)}</div>`:''}
+        <div style="display:flex;gap:4px;flex-shrink:0">
+          <div class="wl-priority-dot" style="background:${WL_PRI_COLOR[item.pri]||'var(--t4)'};width:7px;height:7px;border-radius:50%;align-self:center"></div>
+          ${item.link?`<a href="${escHTML(item.link)}" target="_blank" class="wl-action-btn" title="Open">↗</a>`:''}
+          <button class="wl-action-btn" onclick="openWlEdit('${item.id}')">✎</button>
+          <button class="wl-action-btn" onclick="toggleWlPurchased('${item.id}')" title="${item.purchased?'Unmark':'Mark purchased'}">${item.purchased?'↩':'✓'}</button>
+          <button class="wl-action-btn del" onclick="delWlItem('${item.id}')">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function setWlCat(cat,btn){
+  wlCatFilter=cat;
+  document.querySelectorAll('.wl-filter-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  renderWishlist();
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  PHYSIQUE VAULT ENGINE
+// ═══════════════════════════════════════════════════════
+if(!S.physiquePhotos)S.physiquePhotos=[];
+let physiqueUnlocked=false;
+let phPcBuffer='';
+let phPendingData=null; // base64 of selected image
+
+// ── Passcode ─────────────────────────────────────────────
+function physiqueCheckCode(input){ return input==='170'; }
+
+function renderPhysiqueVault(){
+  const vaultEl=document.getElementById('physique-vault');
+  const statusLbl=document.getElementById('physique-status-lbl');
+  const addBtn=document.getElementById('physique-add-btn');
+  const lockBtn=document.getElementById('physique-lock-btn');
+  if(!vaultEl)return;
+
+  if(!physiqueUnlocked){
+    if(statusLbl)statusLbl.textContent='Locked 🔒';
+    if(addBtn)addBtn.style.display='none';
+    if(lockBtn)lockBtn.style.display='none';
+    vaultEl.innerHTML=`
+      <div class="physique-locked">
+        <div class="physique-locked-icon">🔐</div>
+        <div class="physique-locked-t">Physique Vault</div>
+        <div class="physique-locked-s">Your progress photos are private. Enter your passcode to access them.</div>
+        <div class="ph-pc-wrap">
+          <div class="ph-pc-dots" id="ph-dots">
+            <div class="ph-pc-dot" id="phd-0"></div>
+            <div class="ph-pc-dot" id="phd-1"></div>
+            <div class="ph-pc-dot" id="phd-2"></div>
+          </div>
+          <div class="ph-pc-error" id="ph-pc-error"></div>
+          <div class="ph-pc-keys">
+            <button class="ph-pc-key" onclick="phPcKey('1')">1</button>
+            <button class="ph-pc-key" onclick="phPcKey('2')">2</button>
+            <button class="ph-pc-key" onclick="phPcKey('3')">3</button>
+            <button class="ph-pc-key" onclick="phPcKey('4')">4</button>
+            <button class="ph-pc-key" onclick="phPcKey('5')">5</button>
+            <button class="ph-pc-key" onclick="phPcKey('6')">6</button>
+            <button class="ph-pc-key" onclick="phPcKey('7')">7</button>
+            <button class="ph-pc-key" onclick="phPcKey('8')">8</button>
+            <button class="ph-pc-key" onclick="phPcKey('9')">9</button>
+            <button class="ph-pc-key ph-pc-empty" style="background:none;border:none"></button>
+            <button class="ph-pc-key" onclick="phPcKey('0')">0</button>
+            <button class="ph-pc-key del" onclick="phPcDel()">⌫</button>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Unlocked
+  if(statusLbl)statusLbl.textContent='Unlocked 🔓';
+  if(addBtn)addBtn.style.display='inline-flex';
+  if(lockBtn)lockBtn.style.display='inline-flex';
+
+  const photos=S.physiquePhotos||[];
+  if(!photos.length){
+    vaultEl.innerHTML=`<div style="padding:28px;text-align:center">
+      <div style="font-size:28px;opacity:.3;margin-bottom:10px">📷</div>
+      <div style="font-size:11px;color:var(--t3);margin-bottom:4px">No photos yet</div>
+      <div style="font-size:10px;color:var(--t4)">Click "+ Add photo" to start tracking your physique progress</div>
+    </div>`;
+    return;
+  }
+
+  // Sort by date
+  const sorted=[...photos].sort((a,b)=>b.date.localeCompare(a.date));
+
+  // Timeline strip
+  let timelineHtml=`<div class="physique-timeline" id="physique-timeline">`;
+  sorted.forEach((p,i)=>{
+    timelineHtml+=`<div class="physique-timeline-item ${i===0?'active':''}" onclick="physiqueTimelineClick(${i})">
+      <img src="${p.data}" alt="">
+      <div class="physique-timeline-date">${new Date(p.date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})}</div>
+    </div>`;
+  });
+  timelineHtml+=`</div>`;
+
+  // Grid
+  let gridHtml=`<div class="physique-grid" id="physique-grid">`;
+  sorted.forEach((p,i)=>{
+    const dateStr=new Date(p.date+'T00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    gridHtml+=`<div class="physique-card" onclick="openLightbox(${i})">
+      <img src="${p.data}" alt="Progress photo">
+      <button class="physique-del" onclick="event.stopPropagation();delPhysiquePhoto('${p.id}')">✕</button>
+      <div class="physique-card-footer">
+        <div class="physique-card-date">${new Date(p.date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'})}</div>
+        <span class="physique-card-tag">${p.tag||'photo'}</span>
+      </div>
+    </div>`;
+  });
+  gridHtml+=`</div>`;
+
+  // Comparison section — show oldest vs most recent side by side
+  let compareHtml='';
+  if(sorted.length>=2){
+    const newest=sorted[0], oldest=sorted[sorted.length-1];
+    compareHtml=`
+      <div style="margin-top:16px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Progress comparison</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:4px">THEN · ${new Date(oldest.date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+            <img src="${oldest.data}" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);border:1px solid var(--line);opacity:.8">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:4px">NOW · ${new Date(newest.date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+            <img src="${newest.data}" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);border:1px solid rgba(255,255,255,.2)">
+          </div>
+        </div>
+      </div>`;
+  }
+
+  vaultEl.innerHTML=timelineHtml+gridHtml+compareHtml;
+}
+
+// ── Passcode input ────────────────────────────────────────
+function phPcKey(k){
+  if(phPcBuffer.length>=3)return;
+  phPcBuffer+=k;
+  phUpdateDots();
+  if(phPcBuffer.length===3)setTimeout(phPcSubmit,120);
+}
+function phPcDel(){
+  phPcBuffer=phPcBuffer.slice(0,-1);
+  phUpdateDots();
+}
+function phUpdateDots(){
+  for(let i=0;i<3;i++){
+    const d=document.getElementById('phd-'+i);
+    if(d)d.classList.toggle('filled',i<phPcBuffer.length);
+  }
+}
+function phPcSubmit(){
+  if(physiqueCheckCode(phPcBuffer)){
+    physiqueUnlocked=true;
+    renderPhysiqueVault();
+  } else {
+    const errEl=document.getElementById('ph-pc-error');
+    if(errEl)errEl.textContent='Wrong passcode';
+    const dotsEl=document.getElementById('ph-dots');
+    if(dotsEl){dotsEl.style.transform='translateX(-6px)';setTimeout(()=>{dotsEl.style.transform='translateX(6px)';setTimeout(()=>{dotsEl.style.transform='';},70);},70);}
+    setTimeout(()=>{phPcBuffer='';phUpdateDots();if(errEl)errEl.textContent='';},900);
+  }
+}
+function physiquelock(){
+  physiqueUnlocked=false;
+  renderPhysiqueVault();
+}
+
+// ── Photo upload ──────────────────────────────────────────
+function phPreview(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    phPendingData=ev.target.result;
+    const img=document.getElementById('ph-preview-img');
+    const wrap=document.getElementById('ph-preview-wrap');
+    if(img){img.src=phPendingData;}
+    if(wrap)wrap.style.display='block';
+  };
+  r.readAsDataURL(f);
+}
+function savePhysiquePhoto(){
+  if(!phPendingData){alert('Please select a photo first.');return;}
+  S.physiquePhotos=S.physiquePhotos||[];
+  S.physiquePhotos.push({
+    id:uid(),
+    date:document.getElementById('ph-date').value||todayISO(),
+    tag:document.getElementById('ph-tag').value,
+    note:document.getElementById('ph-note').value.trim(),
+    data:phPendingData,
+  });
+  phPendingData=null;
+  save();
+  closeModal('m-physique-add');
+  // Reset form
+  document.getElementById('ph-file').value='';
+  document.getElementById('ph-note').value='';
+  document.getElementById('ph-preview-wrap').style.display='none';
+  renderPhysiqueVault();
+}
+function delPhysiquePhoto(id){
+  S.physiquePhotos=(S.physiquePhotos||[]).filter(p=>p.id!==id);
+  save();renderPhysiqueVault();
+}
+
+// ── Lightbox ──────────────────────────────────────────────
+let lightboxPhotos=[];
+function openLightbox(idx){
+  const sorted=[...(S.physiquePhotos||[])].sort((a,b)=>b.date.localeCompare(a.date));
+  lightboxPhotos=sorted;
+  showLightboxPhoto(idx);
+  document.getElementById('physique-lightbox').classList.add('open');
+}
+function showLightboxPhoto(idx){
+  const p=lightboxPhotos[idx];if(!p)return;
+  const img=document.getElementById('lightbox-img');
+  const meta=document.getElementById('lightbox-meta');
+  if(img)img.src=p.data;
+  if(meta)meta.textContent=`${new Date(p.date+'T00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})} · ${p.tag||''}${p.note?' · '+p.note:''}`;
+}
+function closeLightbox(){
+  document.getElementById('physique-lightbox').classList.remove('open');
+}
+function physiqueTimelineClick(idx){
+  document.querySelectorAll('.physique-timeline-item').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  openLightbox(idx);
+}
+
+// ── Wire into renderBody ──────────────────────────────────
+// Patch renderBody to also call renderPhysiqueVault
+const _origRenderBody=renderBody;
+renderBody=function(){
+  _origRenderBody();
+  renderPhysiqueVault();
+};
+
+// ── Keyboard on physique passcode ─────────────────────────
+document.addEventListener('keydown',function(e){
+  const vaultEl=document.getElementById('physique-vault');
+  const bodyActive=document.getElementById('view-body')?.classList.contains('active');
+  if(!bodyActive||physiqueUnlocked)return;
+  if(e.key>='0'&&e.key<='9'){phPcKey(e.key);}
+  else if(e.key==='Backspace'){phPcDel();}
+  else if(e.key==='Enter'&&phPcBuffer.length===3){phPcSubmit();}
+});
+
+window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.phPcKey=phPcKey;window.phPcDel=phPcDel;window.phPreview=phPreview;window.savePhysiquePhoto=savePhysiquePhoto;window.delPhysiquePhoto=delPhysiquePhoto;window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.physiquelock=physiquelock;window.physiqueTimelineClick=physiqueTimelineClick;window.renderWishlist=renderWishlist;window.setWlView=setWlView;window.setWlCat=setWlCat;window.saveWlItem=saveWlItem;window.delWlItem=delWlItem;window.toggleWlPurchased=toggleWlPurchased;window.openWlAdd=openWlAdd;window.openWlEdit=openWlEdit;window.secretHeartClick=secretHeartClick;window.secretLock=secretLock;window.pcKey=pcKey;window.pcDel=pcDel;window.openHerProfile=openHerProfile;window.herAvatarUpload=herAvatarUpload;window.saveHerProfile=saveHerProfile;window.saveWish=saveWish;window.delWish=delWish;window.saveDateIdea=saveDateIdea;window.delDateIdea=delDateIdea;window.generateDateIdea=generateDateIdea;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
 </script>
 </body>
 </html>
