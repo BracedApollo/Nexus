@@ -289,6 +289,51 @@ select.inp{cursor:pointer}
 .j-textarea:focus{border-color:#fff}
 .j-textarea::placeholder{color:var(--t4)}
 .j-tag-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3)}
+
+/* ─── SPOTIFY ─── */
+.sp-connect{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:320px;text-align:center}
+.sp-connect-icon{width:64px;height:64px;border-radius:50%;background:#1DB954;display:flex;align-items:center;justify-content:center}
+.sp-connect-icon svg{width:32px;height:32px;fill:#000}
+.sp-connect-t{font-family:var(--display);font-size:28px;font-weight:300;color:var(--t1)}
+.sp-connect-s{font-size:11px;color:var(--t3);max-width:340px;line-height:1.65}
+.btn-spotify{background:#1DB954;border:1px solid #1DB954;color:#000;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;border-radius:99px;cursor:pointer;transition:all .12s}
+.btn-spotify:hover{background:#1ed760;border-color:#1ed760}
+
+.sp-player{display:flex;flex-direction:column;gap:0}
+.sp-now{display:flex;align-items:center;gap:18px;padding:20px;border-bottom:1px solid var(--line)}
+.sp-art{width:72px;height:72px;border-radius:6px;background:var(--s2);flex-shrink:0;object-fit:cover}
+.sp-art-placeholder{width:72px;height:72px;border-radius:6px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sp-info{flex:1;min-width:0}
+.sp-track{font-size:14px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.sp-artist{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.sp-album{font-size:10px;color:var(--t4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-progress{padding:10px 20px 4px}
+.sp-prog-bar{height:2px;background:var(--line2);border-radius:99px;overflow:hidden;margin-bottom:5px;cursor:pointer;position:relative}
+.sp-prog-fill{height:100%;background:#1DB954;border-radius:99px;transition:width .5s linear}
+.sp-times{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t4);font-weight:300}
+.sp-controls{display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 20px 18px}
+.sp-ctrl-btn{background:none;border:none;cursor:pointer;color:var(--t3);transition:color .12s;display:flex;align-items:center;justify-content:center;padding:4px}
+.sp-ctrl-btn:hover{color:var(--t1)}
+.sp-ctrl-btn.play{width:38px;height:38px;border-radius:50%;background:#fff;color:#000;flex-shrink:0;transition:background .12s}
+.sp-ctrl-btn.play:hover{background:#e0e0e0}
+.sp-ctrl-btn.play svg{width:16px;height:16px;fill:currentColor}
+.sp-ctrl-btn svg{width:18px;height:18px;fill:currentColor}
+.sp-ctrl-btn.sm svg{width:14px;height:14px}
+
+.sp-recents{padding:0}
+.sp-recent-row{display:flex;align-items:center;gap:12px;padding:9px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .1s}
+.sp-recent-row:last-child{border-bottom:none}
+.sp-recent-row:hover{background:var(--s2)}
+.sp-recent-art{width:36px;height:36px;border-radius:4px;object-fit:cover;background:var(--s2);flex-shrink:0}
+.sp-recent-info{flex:1;min-width:0}
+.sp-recent-track{font-size:11px;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-recent-artist{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.sp-recent-ago{font-family:var(--mono);font-size:8px;color:var(--t4);flex-shrink:0;font-weight:300}
+
+.sp-error{padding:20px;font-size:11px;color:var(--red);text-align:center}
+.sp-disconnected{display:flex;align-items:center;gap:8px;padding:12px 18px;font-size:10px;color:var(--t4)}
+.sp-dot{width:7px;height:7px;border-radius:50%;background:#1DB954;flex-shrink:0}
+.sp-dot.off{background:var(--t4)}
 </style>
 </head>
 <body>
@@ -441,6 +486,34 @@ select.inp{cursor:pointer}
       </div>
     </div>
   </div>
+  <!-- SPOTIFY VIEW -->
+  <div class="view" id="view-spotify">
+    <div class="page-wrap">
+      <div class="page-hd">
+        <div><h1>Spotify</h1><div class="sub">Now playing · recently played · playback controls</div></div>
+        <div style="display:flex;gap:8px;align-items:center" id="sp-header-right"></div>
+      </div>
+      <div class="grid g2" style="align-items:start">
+        <!-- Player card -->
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-hd-t">Now playing</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div class="sp-dot off" id="sp-status-dot"></div>
+              <span style="font-family:var(--mono);font-size:8px;color:var(--t4);font-weight:300" id="sp-status-lbl">Not connected</span>
+            </div>
+          </div>
+          <div id="sp-player-area"></div>
+        </div>
+        <!-- Recently played -->
+        <div class="card">
+          <div class="card-hd"><span class="card-hd-t">Recently played</span><button class="card-hd-a" onclick="spFetchRecent()">↻ Refresh</button></div>
+          <div class="sp-recents" id="sp-recents"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MED SCHOOL VIEW -->
   <div class="view" id="view-med">
     <div class="page-wrap">
@@ -748,25 +821,27 @@ function goView(v){
   if(v==='cal')renderCal();
   if(v==='med')renderMed();
   if(v==='journal')renderJournal();
+  if(v==='spotify'){renderSpotify();}
 }
 function goHub(){goView('hub');}
 const HUB_NODES=[
   {id:'today',     label:'TODAY',     cx:0.50, cy:0.50, r:60, core:true},
-  {id:'body',      label:'BODY',      cx:0.18, cy:0.22, r:28},
-  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.14, r:28},
-  {id:'goals',     label:'GOALS',     cx:0.82, cy:0.22, r:28},
-  {id:'tasks',     label:'TASKS',     cx:0.88, cy:0.55, r:28},
-  {id:'workout',   label:'TRAINING',  cx:0.78, cy:0.82, r:28},
-  {id:'cal',       label:'TIMELINE',  cx:0.50, cy:0.88, r:28},
-  {id:'med',       label:'MED SCHOOL',cx:0.22, cy:0.82, r:28},
-  {id:'journal',   label:'JOURNAL',   cx:0.12, cy:0.55, r:28},
+  {id:'body',      label:'BODY',      cx:0.18, cy:0.20, r:26},
+  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.12, r:26},
+  {id:'goals',     label:'GOALS',     cx:0.82, cy:0.20, r:26},
+  {id:'tasks',     label:'TASKS',     cx:0.92, cy:0.50, r:26},
+  {id:'workout',   label:'TRAINING',  cx:0.82, cy:0.80, r:26},
+  {id:'cal',       label:'TIMELINE',  cx:0.55, cy:0.90, r:26},
+  {id:'spotify',   label:'SPOTIFY',   cx:0.30, cy:0.90, r:26, spotify:true},
+  {id:'med',       label:'MED SCHOOL',cx:0.10, cy:0.65, r:26},
+  {id:'journal',   label:'JOURNAL',   cx:0.08, cy:0.35, r:26},
 ];
 const HUB_EDGES=[
   ['today','body'],['today','nutrition'],['today','goals'],['today','tasks'],
-  ['today','workout'],['today','cal'],['today','med'],['today','journal'],
-  ['body','nutrition'],['body','journal'],['nutrition','goals'],
-  ['goals','tasks'],['tasks','workout'],['workout','cal'],
-  ['cal','med'],['med','journal'],['journal','body'],
+  ['today','workout'],['today','cal'],['today','spotify'],['today','med'],['today','journal'],
+  ['body','nutrition'],['nutrition','goals'],['goals','tasks'],
+  ['tasks','workout'],['workout','cal'],['cal','spotify'],
+  ['spotify','med'],['med','journal'],['journal','body'],
 ];
 let hubCanvas, hubCtx, hubMouse={x:-9999,y:-9999}, hubHover=null, hubPulses=[], hubBgDots=[], hubAnim=false, hubT=0;
 function nodeStat(n){
@@ -780,6 +855,7 @@ function nodeStat(n){
     case 'cal': return daysLeft()+' days';
     case 'med': {const hrs=(S.medActivities||[]).reduce((a,x)=>a+(+x.hours||0),0);return hrs+' hrs';}
     case 'journal': return (S.journalEntries||[]).length+' entries';
+    case 'spotify': return spConnected()?'connected':'tap to connect';
     default: return '';
   }
 }
@@ -893,8 +969,9 @@ function hubFrame(){
     hubCtx.strokeStyle=`rgba(255,255,255,${0.06+0.10*breath})`;
     hubCtx.lineWidth=1;
     hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r*0.62,0,Math.PI*2);hubCtx.stroke();
-    hubCtx.fillStyle=hovered?'#fff':'rgba(255,255,255,0.55)';
+    hubCtx.fillStyle=hovered?'#fff':(n.spotify&&spConnected()?'#1DB954':'rgba(255,255,255,0.55)');
     hubCtx.beginPath();hubCtx.arc(p.x,p.y,n.core?3:2,0,Math.PI*2);hubCtx.fill();
+    if(n.spotify&&spConnected()){hubCtx.strokeStyle='rgba(29,185,84,0.4)';hubCtx.lineWidth=1;hubCtx.beginPath();hubCtx.arc(p.x,p.y,p.r+5,0,Math.PI*2);hubCtx.stroke();}
   });
   HUB_NODES.forEach(n=>{
     const p=nodePos(n);
@@ -1751,7 +1828,271 @@ function delJournalEntry(id){
   save();renderJournal();
 }
 
-window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.renderMed=renderMed;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
+
+// ═══════════════════════════════════════════════════════
+//  SPOTIFY PKCE ENGINE
+//  Redirect URI: https://bracedapollo.github.io/Nexus/
+// ═══════════════════════════════════════════════════════
+const SP_CLIENT_ID = 'a280a93d42a045169785f457f74c54ca';
+const SP_REDIRECT   = 'https://bracedapollo.github.io/Nexus/';
+const SP_SCOPES     = 'user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played';
+
+// ── PKCE helpers ────────────────────────────────────────
+function spRandom(len=64){const a=new Uint8Array(len);crypto.getRandomValues(a);return a;}
+function spB64(buf){return btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');}
+async function spSHA256(plain){const enc=new TextEncoder().encode(plain);return crypto.subtle.digest('SHA-256',enc);}
+async function spCodeChallenge(verifier){return spB64(await spSHA256(verifier));}
+
+// ── Token storage ────────────────────────────────────────
+function spSaveToken(t){localStorage.setItem('sp_token',JSON.stringify(t));}
+function spLoadToken(){try{return JSON.parse(localStorage.getItem('sp_token'));}catch{return null;}}
+function spClearToken(){localStorage.removeItem('sp_token');localStorage.removeItem('sp_verifier');}
+function spConnected(){const t=spLoadToken();return !!(t&&t.access_token);}
+function spExpired(){const t=spLoadToken();if(!t)return true;return Date.now()>t.expires_at-30000;}
+
+// ── Auth ─────────────────────────────────────────────────
+async function spConnect(){
+  if(SP_CLIENT_ID==='YOUR_SPOTIFY_CLIENT_ID'){
+    alert('⚠️  Paste your Spotify Client ID into the SP_CLIENT_ID variable in the code first!');
+    return;
+  }
+  const verifier=spB64(spRandom(64));
+  localStorage.setItem('sp_verifier',verifier);
+  const challenge=await spCodeChallenge(verifier);
+  const params=new URLSearchParams({
+    client_id:SP_CLIENT_ID,
+    response_type:'code',
+    redirect_uri:SP_REDIRECT,
+    scope:SP_SCOPES,
+    code_challenge_method:'S256',
+    code_challenge:challenge,
+    state:'nexus_sp'
+  });
+  window.location.href='https://accounts.spotify.com/authorize?'+params.toString();
+}
+
+async function spHandleCallback(){
+  const params=new URLSearchParams(window.location.search);
+  const code=params.get('code');
+  const state=params.get('state');
+  const error=params.get('error');
+  if(error){console.warn('Spotify auth error:',error);spClearToken();return;}
+  if(!code||state!=='nexus_sp')return;
+  // Clear URL without reload
+  window.history.replaceState({},'',SP_REDIRECT);
+  const verifier=localStorage.getItem('sp_verifier');
+  if(!verifier){console.warn('No PKCE verifier found');return;}
+  try{
+    const resp=await fetch('https://accounts.spotify.com/api/token',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({
+        client_id:SP_CLIENT_ID,
+        grant_type:'authorization_code',
+        code,redirect_uri:SP_REDIRECT,
+        code_verifier:verifier
+      })
+    });
+    const data=await resp.json();
+    if(data.access_token){
+      spSaveToken({...data,expires_at:Date.now()+data.expires_in*1000});
+      localStorage.removeItem('sp_verifier');
+      goView('spotify');
+    }
+  }catch(e){console.error('Token exchange failed',e);}
+}
+
+async function spRefresh(){
+  const t=spLoadToken();
+  if(!t?.refresh_token)return false;
+  try{
+    const resp=await fetch('https://accounts.spotify.com/api/token',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({
+        client_id:SP_CLIENT_ID,
+        grant_type:'refresh_token',
+        refresh_token:t.refresh_token
+      })
+    });
+    const data=await resp.json();
+    if(data.access_token){
+      spSaveToken({...t,...data,expires_at:Date.now()+data.expires_in*1000});
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+async function spAPI(path,method='GET',body=null){
+  if(spExpired())if(!await spRefresh()){spClearToken();renderSpotify();return null;}
+  const t=spLoadToken();
+  const opts={method,headers:{Authorization:'Bearer '+t.access_token}};
+  if(body){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(body);}
+  const r=await fetch('https://api.spotify.com/v1'+path,opts);
+  if(r.status===204||r.status===202||r.status===200&&!r.headers.get('content-type')?.includes('json'))return true;
+  if(r.status===401){spClearToken();renderSpotify();return null;}
+  if(!r.ok)return null;
+  try{return await r.json();}catch{return null;}
+}
+
+// ── Now playing state ─────────────────────────────────────
+let spState=null; // current playback state
+let spPollTimer=null;
+
+async function spFetchNow(){
+  const data=await spAPI('/me/player');
+  spState=data;
+  renderNowPlaying();
+}
+
+async function spFetchRecent(){
+  const data=await spAPI('/me/player/recently-played?limit=10');
+  const el=document.getElementById('sp-recents');if(!el)return;
+  if(!data||!data.items||!data.items.length){
+    el.innerHTML='<div style="padding:14px;font-size:11px;color:var(--t3)">No recent tracks found.</div>';
+    return;
+  }
+  el.innerHTML=data.items.map(item=>{
+    const track=item.track;
+    const art=track.album?.images?.[2]?.url||track.album?.images?.[0]?.url||'';
+    const ago=timeAgo(new Date(item.played_at));
+    return `<div class="sp-recent-row" onclick="spPlay('${track.uri}')">
+      ${art?`<img class="sp-recent-art" src="${escHTML(art)}" alt="">`:'<div class="sp-recent-art"></div>'}
+      <div class="sp-recent-info">
+        <div class="sp-recent-track">${escHTML(track.name)}</div>
+        <div class="sp-recent-artist">${escHTML(track.artists?.map(a=>a.name).join(', ')||'')}</div>
+      </div>
+      <div class="sp-recent-ago">${ago}</div>
+    </div>`;
+  }).join('');
+}
+
+function timeAgo(date){
+  const s=Math.round((Date.now()-date)/1000);
+  if(s<60)return s+'s ago';
+  if(s<3600)return Math.round(s/60)+'m ago';
+  if(s<86400)return Math.round(s/3600)+'h ago';
+  return Math.round(s/86400)+'d ago';
+}
+function fmtMs(ms){const s=Math.round(ms/1000);return Math.floor(s/60)+':'+(s%60+'').padStart(2,'0');}
+
+// ── Playback controls ─────────────────────────────────────
+async function spPlay(uri=null){
+  await spAPI('/me/player/play','PUT',uri?{uris:[uri]}:undefined);
+  setTimeout(spFetchNow,500);
+}
+async function spPause(){await spAPI('/me/player/pause','PUT');setTimeout(spFetchNow,400);}
+async function spNext(){await spAPI('/me/player/next','POST');setTimeout(spFetchNow,500);}
+async function spPrev(){await spAPI('/me/player/previous','POST');setTimeout(spFetchNow,500);}
+async function spToggle(){
+  if(!spState?.is_playing)await spPlay();
+  else await spPause();
+}
+async function spSeek(e){
+  if(!spState?.item)return;
+  const bar=e.currentTarget;
+  const pct=(e.clientX-bar.getBoundingClientRect().left)/bar.offsetWidth;
+  const pos=Math.round(pct*spState.item.duration_ms);
+  await spAPI('/me/player/seek?position_ms='+pos,'PUT');
+  setTimeout(spFetchNow,400);
+}
+
+// ── Render ────────────────────────────────────────────────
+function renderSpotify(){
+  const hdr=document.getElementById('sp-header-right');
+  const playerEl=document.getElementById('sp-player-area');
+  const dotEl=document.getElementById('sp-status-dot');
+  const lblEl=document.getElementById('sp-status-lbl');
+  if(!playerEl)return;
+
+  if(!spConnected()){
+    // Show connect UI
+    if(hdr)hdr.innerHTML='';
+    if(dotEl)dotEl.classList.replace('sp-dot','sp-dot off')||dotEl.classList.add('off');
+    if(lblEl)lblEl.textContent='Not connected';
+    playerEl.innerHTML=`<div class="sp-connect">
+      <div class="sp-connect-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
+      <div class="sp-connect-t">Connect Spotify</div>
+      <div class="sp-connect-s">Link your Spotify account to see what you're playing and control playback from your dashboard.</div>
+      <button class="btn-spotify" onclick="spConnect()">Connect with Spotify</button>
+      <div style="font-size:9px;color:var(--t4);font-family:var(--mono);font-weight:300">Requires Spotify Premium for playback controls</div>
+    </div>`;
+    document.getElementById('sp-recents').innerHTML='<div style="padding:14px;font-size:11px;color:var(--t3)">Connect Spotify to see recent tracks.</div>';
+    if(spPollTimer){clearInterval(spPollTimer);spPollTimer=null;}
+    return;
+  }
+
+  // Connected
+  if(dotEl){dotEl.classList.remove('off');}
+  if(lblEl)lblEl.textContent='Connected';
+  if(hdr)hdr.innerHTML=`<button class="btn btn-g btn-sm" onclick="spClearToken();renderSpotify()">Disconnect</button>`;
+
+  // Start polling
+  if(!spPollTimer)spPollTimer=setInterval(spFetchNow,5000);
+  spFetchNow();
+  spFetchRecent();
+}
+
+function renderNowPlaying(){
+  const el=document.getElementById('sp-player-area');if(!el)return;
+  if(!spState||!spState.item){
+    el.innerHTML=`<div style="padding:24px;text-align:center">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:12px">Nothing playing right now</div>
+      <div style="font-size:9px;color:var(--t4);font-family:var(--mono)">Open Spotify on any device and start playing</div>
+    </div>`;
+    return;
+  }
+  const track=spState.item;
+  const art=track.album?.images?.[0]?.url||'';
+  const pct=track.duration_ms?Math.round(spState.progress_ms/track.duration_ms*100):0;
+  const playing=spState.is_playing;
+  el.innerHTML=`<div class="sp-player">
+    <div class="sp-now">
+      ${art?`<img class="sp-art" src="${escHTML(art)}" alt="">`:'<div class="sp-art-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="rgba(255,255,255,.2)"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>'}
+      <div class="sp-info">
+        <div class="sp-track">${escHTML(track.name)}</div>
+        <div class="sp-artist">${escHTML(track.artists?.map(a=>a.name).join(', ')||'')}</div>
+        <div class="sp-album">${escHTML(track.album?.name||'')}</div>
+      </div>
+    </div>
+    <div class="sp-progress">
+      <div class="sp-prog-bar" onclick="spSeek(event)">
+        <div class="sp-prog-fill" style="width:${pct}%"></div>
+      </div>
+      <div class="sp-times">
+        <span>${fmtMs(spState.progress_ms||0)}</span>
+        <span>${fmtMs(track.duration_ms||0)}</span>
+      </div>
+    </div>
+    <div class="sp-controls">
+      <button class="sp-ctrl-btn sm" onclick="spPrev()" title="Previous">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button class="sp-ctrl-btn play" onclick="spToggle()" title="${playing?'Pause':'Play'}">
+        ${playing
+          ?'<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'
+          :'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'}
+      </button>
+      <button class="sp-ctrl-btn sm" onclick="spNext()" title="Next">
+        <svg viewBox="0 0 24 24"><path d="m6 18 8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+    </div>
+    <div class="sp-disconnected">
+      <div class="sp-dot"></div>
+      <span style="font-size:9px;font-family:var(--mono);font-weight:300">${escHTML(spState.device?.name||'Unknown device')} · ${spState.device?.type||''}</span>
+    </div>
+  </div>`;
+}
+
+// ── Handle OAuth callback on page load ────────────────────
+(async()=>{
+  if(window.location.search.includes('code=')&&window.location.search.includes('nexus_sp')){
+    await spHandleCallback();
+  }
+})();
+
+window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
 </script>
 </body>
 </html>
