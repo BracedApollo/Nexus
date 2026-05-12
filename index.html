@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>NEXUS — Neural Dashboard</title>
+<link rel="manifest" href="/Nexus/manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NEXUS">
+<meta name="theme-color" content="#000000">
+<meta name="msapplication-TileColor" content="#000000">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='36' fill='%23000'/><circle cx='90' cy='90' r='36' fill='none' stroke='%23fff' stroke-width='1.5' opacity='0.9'/><circle cx='90' cy='90' r='4' fill='%23fff'/><line x1='90' y1='54' x2='65' y2='40' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='90' y1='54' x2='115' y2='40' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='126' y1='90' x2='145' y2='68' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='126' y1='90' x2='145' y2='112' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='90' y1='126' x2='65' y2='145' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='90' y1='126' x2='115' y2='145' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='54' y1='90' x2='35' y2='68' stroke='%23fff' stroke-width='0.8' opacity='0.5'/><line x1='54' y1='90' x2='35' y2='112' stroke='%23fff' stroke-width='0.8' opacity='0.5'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Syne:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -575,6 +583,34 @@ body.journal-active .secret-heart:hover{opacity:.45}
 .run-week-desc{font-size:11px;color:var(--t2);flex:1}
 .run-week-phase{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);padding:2px 7px;border:1px solid var(--line2);border-radius:3px;flex-shrink:0}
 .run-week.done-row .run-week-desc{color:var(--t4);text-decoration:line-through}
+
+/* ─── PWA INSTALL BANNER ─── */
+.pwa-banner{position:fixed;bottom:0;left:0;right:0;z-index:9900;background:rgba(10,10,10,.98);border-top:1px solid rgba(255,255,255,.12);padding:14px 20px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(20px);transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.pwa-banner.show{transform:translateY(0)}
+.pwa-banner-icon{width:42px;height:42px;border-radius:10px;background:#000;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pwa-banner-info{flex:1;min-width:0}
+.pwa-banner-title{font-size:13px;font-weight:600;color:var(--t1);letter-spacing:.01em}
+.pwa-banner-sub{font-size:10px;color:var(--t3);margin-top:2px}
+.pwa-banner-btns{display:flex;gap:8px;flex-shrink:0}
+
+/* ─── NOTIFICATION SETTINGS ─── */
+.notif-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+.notif-row:last-child{border-bottom:none}
+.notif-info{flex:1;min-width:0}
+.notif-label{font-size:12px;color:var(--t1);font-weight:500}
+.notif-sub{font-size:10px;color:var(--t3);margin-top:2px}
+.notif-time{font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px;font-weight:300}
+.notif-toggle{position:relative;width:38px;height:22px;flex-shrink:0;cursor:pointer}
+.notif-toggle input{opacity:0;width:0;height:0;position:absolute}
+.notif-slider{position:absolute;inset:0;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);transition:all .2s}
+.notif-slider::before{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.4);top:2px;left:2px;transition:all .2s}
+.notif-toggle input:checked + .notif-slider{background:#fff;border-color:#fff}
+.notif-toggle input:checked + .notif-slider::before{transform:translateX(16px);background:#000}
+.notif-status{display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:5px;margin-bottom:12px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.notif-status.granted{background:rgba(122,138,120,.1);color:#7a8a78;border:1px solid rgba(122,138,120,.25)}
+.notif-status.denied{background:rgba(158,107,107,.08);color:#c47070;border:1px solid rgba(158,107,107,.2)}
+.notif-status.default{background:rgba(255,255,255,.04);color:var(--t3);border:1px solid var(--line2)}
+.notif-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -601,10 +637,28 @@ body.journal-active .secret-heart:hover{opacity:.45}
       <div class="page-hd"><div><h1>Today</h1><div class="sub">Your calculated plan, computed live from your goals</div></div></div>
       <div class="grid g4" id="today-kpis"></div>
       <div class="grid g2" style="margin-top:14px">
-        <div class="card"><div class="card-hd"><span class="card-hd-t">Today's Macros</span><button class="card-hd-a" onclick="goView('nutrition')">Log food →</button></div><div class="card-bd" id="today-macros"></div></div>
-        <div class="card"><div class="card-hd"><span class="card-hd-t">Today's Tasks</span><button class="card-hd-a" onclick="goView('tasks')">All tasks →</button></div><div class="card-bd card-bd-np" style="padding:6px 16px 12px" id="today-tasks"></div></div>
+        <div class="card"><div class="card-hd"><span class="card-hd-t">Today’s Macros</span><button class="card-hd-a" onclick="goView('nutrition')">Log food →</button></div><div class="card-bd" id="today-macros"></div></div>
+        <div class="card"><div class="card-hd"><span class="card-hd-t">Today’s Tasks</span><button class="card-hd-a" onclick="goView('tasks')">All tasks →</button></div><div class="card-bd card-bd-np" style="padding:6px 16px 12px" id="today-tasks"></div></div>
       </div>
-      <div class="card" style="margin-top:14px"><div class="card-hd"><span class="card-hd-t">Today's Directive</span><button class="card-hd-a" onclick="loadDirective()">↻ Refresh</button></div><div class="card-bd" id="today-directive"><div style="font-family:var(--display);font-style:italic;font-size:16px;color:var(--t2);line-height:1.7" id="dir-txt">Press refresh to generate today's directive…</div></div></div>
+      <div class="card" style="margin-top:14px"><div class="card-hd"><span class="card-hd-t">Today’s Directive</span><button class="card-hd-a" onclick="loadDirective()">↻ Refresh</button></div><div class="card-bd" id="today-directive"><div style="font-family:var(--display);font-style:italic;font-size:16px;color:var(--t2);line-height:1.7" id="dir-txt">Press refresh to generate today’s directive…</div></div></div>
+      <!-- Notification & PWA settings -->
+      <div class="card" style="margin-top:14px">
+        <div class="card-hd">
+          <span class="card-hd-t">Notifications & App</span>
+          <button class="card-hd-a" onclick="requestNotifPermission()" id="notif-enable-btn">Enable notifications</button>
+        </div>
+        <div class="card-bd">
+          <div id="notif-permission-status"></div>
+          <div id="notif-rows"></div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t4);margin-bottom:8px">App</div>
+            <div class="notif-row">
+              <div class="notif-info"><div class="notif-label">Install as app</div><div class="notif-sub">Add NEXUS to your home screen for fullscreen experience</div></div>
+              <button class="btn btn-g btn-sm" onclick="triggerInstall()" id="install-btn-card">Install</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="view" id="view-body">
@@ -634,7 +688,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
       <div class="page-hd"><div><h1>Nutrition</h1><div class="sub">Macros calculated from your weight goal & deadline</div></div></div>
       <div class="grid g4" id="nutr-kpis"></div>
       <div class="grid g2" style="margin-top:14px">
-        <div class="card"><div class="card-hd"><span class="card-hd-t">Today's targets</span></div><div class="card-bd" id="nutr-bars"></div></div>
+        <div class="card"><div class="card-hd"><span class="card-hd-t">Today’s targets</span></div><div class="card-bd" id="nutr-bars"></div></div>
         <div class="card"><div class="card-hd"><span class="card-hd-t">Food log</span><button class="card-hd-a" onclick="toggleFoodForm()">+ Add</button></div><div class="card-bd card-bd-np" style="padding:6px 16px 12px" id="nutr-foods"></div>
           <div id="nutr-food-form" style="display:none;padding:0 16px 14px;border-top:1px solid var(--line);margin-top:6px;padding-top:12px">
             <div class="inp-row" style="margin-bottom:6px"><input class="inp" id="fn-name" placeholder="Food name" style="flex:2"><input class="inp" id="fn-qty" placeholder="Amount" style="flex:1"></div>
@@ -834,7 +888,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
             <div class="sp-connect">
               <div class="sp-connect-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
               <div class="sp-connect-t">Connect Spotify</div>
-              <div class="sp-connect-s">Link your Spotify account to see what's playing and control playback from your dashboard.</div>
+              <div class="sp-connect-s">Link your Spotify account to see what’s playing and control playback from your dashboard.</div>
               <button class="btn-spotify" onclick="spConnect()">Connect with Spotify</button>
               <div style="font-size:9px;color:var(--t4);font-family:var(--mono);font-weight:300">Requires Spotify Premium for playback controls</div>
             </div>
@@ -915,7 +969,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
           <!-- Structured prompts -->
           <div class="j-section">
             <div class="j-section-lbl">What went well today?</div>
-            <textarea class="j-textarea" id="j-went-well" rows="2" placeholder="Wins, progress, moments you're proud of…"></textarea>
+            <textarea class="j-textarea" id="j-went-well" rows="2" placeholder="Wins, progress, moments you’re proud of…"></textarea>
           </div>
           <div class="j-section">
             <div class="j-section-lbl">Challenges / what was hard</div>
@@ -923,7 +977,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
           </div>
           <div class="j-section">
             <div class="j-section-lbl">Gratitude (3 things)</div>
-            <textarea class="j-textarea" id="j-gratitude" rows="2" placeholder="I'm grateful for…"></textarea>
+            <textarea class="j-textarea" id="j-gratitude" rows="2" placeholder="I’m grateful for…"></textarea>
           </div>
           <div class="j-section">
             <div class="j-section-lbl">Free write</div>
@@ -1210,7 +1264,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
   <div class="view" id="view-wishlist">
     <div class="page-wrap">
       <div class="page-hd">
-        <div><h1>Wishlist</h1><div class="sub">Your personal registry · track what you want, what you need, what you're saving for</div></div>
+        <div><h1>Wishlist</h1><div class="sub">Your personal registry · track what you want, what you need, what you’re saving for</div></div>
         <button class="btn btn-o btn-sm" onclick="openWlAdd()">+ Add item</button>
       </div>
 
@@ -1255,7 +1309,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
       <!-- AI date suggestion -->
       <div class="card" style="margin-bottom:14px">
         <div class="card-hd">
-          <span class="card-hd-t">✦ This week's date idea</span>
+          <span class="card-hd-t">✦ This week’s date idea</span>
           <button class="card-hd-a" onclick="generateDateIdea()">↻ Generate new</button>
         </div>
         <div class="card-bd" id="ai-date-out">
@@ -1280,6 +1334,23 @@ body.journal-active .secret-heart:hover{opacity:.45}
   </div>
 
 </div>
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwa-banner">
+  <div class="pwa-banner-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="rgba(255,255,255,.8)"/>
+    </svg>
+  </div>
+  <div class="pwa-banner-info">
+    <div class="pwa-banner-title">Install NEXUS</div>
+    <div class="pwa-banner-sub">Add to home screen for the full app experience</div>
+  </div>
+  <div class="pwa-banner-btns">
+    <button class="btn btn-g btn-sm" onclick="dismissInstall()">Not now</button>
+    <button class="btn btn-p btn-sm" onclick="triggerInstall()">Install</button>
+  </div>
+</div>
+
 <div class="pp-overlay" id="pp-overlay" onclick="if(event.target===this)closeProfile()">
   <div class="pp">
     <div class="pp-hd">
@@ -1316,7 +1387,7 @@ body.journal-active .secret-heart:hover{opacity:.45}
         <div class="pp-sec"><div class="pp-sec-t">Calculations</div><div id="pp-calcs"></div></div>
       </div>
       <div id="pp-bio" style="display:none">
-        <div class="pp-sec"><div class="pp-sec-t">Biography</div><textarea class="inp" id="pf-bio" rows="6" placeholder="Who you are, what you're working toward…" style="resize:vertical;line-height:1.6" oninput="liveProfile()"></textarea></div>
+        <div class="pp-sec"><div class="pp-sec-t">Biography</div><textarea class="inp" id="pf-bio" rows="6" placeholder="Who you are, what you’re working toward…" style="resize:vertical;line-height:1.6" oninput="liveProfile()"></textarea></div>
       </div>
     </div>
     <div class="pp-ft"><span class="pp-saved" id="pp-saved">✓ Saved</span><div style="display:flex;gap:8px"><button class="btn btn-g btn-sm" onclick="closeProfile()">Close</button><button class="btn btn-p btn-sm" onclick="saveAndApply()">Save</button></div></div>
@@ -2684,7 +2755,14 @@ async function generateWeeklyTasks(){
 document.getElementById('hub-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
 document.getElementById('w-dt').value=todayISO();document.getElementById('ma-date').value=todayISO();document.getElementById('ph-date').value=todayISO();document.getElementById('ms-date').value=todayISO();document.getElementById('ce-date').value=todayISO();
 updateAvatarUI();
-window.addEventListener('load',()=>{initHub();updateHeartVisibility('hub');});
+window.addEventListener('load',()=>{
+  initHub();
+  updateHeartVisibility('hub');
+  registerSW();
+  handleURLParams();
+  // Re-schedule notifications daily when app opens
+  if(Notification.permission==='granted') setTimeout(scheduleAllNotifications, 1500);
+});
 window.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&document.getElementById('physique-lightbox')?.classList.contains('open')){
     closeLightbox();return;
@@ -3088,7 +3166,7 @@ function renderSpotify(){
     playerEl.innerHTML=`<div class="sp-connect">
       <div class="sp-connect-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
       <div class="sp-connect-t">Connect Spotify</div>
-      <div class="sp-connect-s">Link your Spotify account to see what you're playing and control playback from your dashboard.</div>
+      <div class="sp-connect-s">Link your Spotify account to see what you’re playing and control playback from your dashboard.</div>
       <button class="btn-spotify" onclick="spConnect()">Connect with Spotify</button>
       <div style="font-size:9px;color:var(--t4);font-family:var(--mono);font-weight:300">Requires Spotify Premium for playback controls</div>
     </div>`;
@@ -3915,7 +3993,213 @@ function showWorkoutDay(day,btn){
   if(panel)panel.style.display='block';
 }
 
-window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.renderBrand=renderBrand;window.toggleBrandTask=toggleBrandTask;window.brandPhase=brandPhase;window.toggleRunWeek=toggleRunWeek;window.showWorkoutDay=showWorkoutDay;window.phPcKey=phPcKey;window.phPcDel=phPcDel;window.phPreview=phPreview;window.savePhysiquePhoto=savePhysiquePhoto;window.delPhysiquePhoto=delPhysiquePhoto;window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.physiquelock=physiquelock;window.physiqueTimelineClick=physiqueTimelineClick;window.renderWishlist=renderWishlist;window.setWlView=setWlView;window.setWlCat=setWlCat;window.saveWlItem=saveWlItem;window.delWlItem=delWlItem;window.toggleWlPurchased=toggleWlPurchased;window.openWlAdd=openWlAdd;window.openWlEdit=openWlEdit;window.secretHeartClick=secretHeartClick;window.secretLock=secretLock;window.pcKey=pcKey;window.pcDel=pcDel;window.openHerProfile=openHerProfile;window.herAvatarUpload=herAvatarUpload;window.saveHerProfile=saveHerProfile;window.saveWish=saveWish;window.delWish=delWish;window.saveDateIdea=saveDateIdea;window.delDateIdea=delDateIdea;window.generateDateIdea=generateDateIdea;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
+
+// ═══════════════════════════════════════════════════════
+//  PWA ENGINE — Service Worker + Install + Notifications
+// ═══════════════════════════════════════════════════════
+const SW_PATH = '/Nexus/sw.js';
+let swReg = null;
+let deferredInstallPrompt = null;
+
+// ── Register service worker ───────────────────────────────
+async function registerSW() {
+  if (!('serviceWorker' in navigator)) return;
+  try {
+    swReg = await navigator.serviceWorker.register(SW_PATH, { scope: '/Nexus/' });
+    console.log('[NEXUS] SW registered:', swReg.scope);
+    // Listen for messages from SW (e.g. navigate on notification tap)
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'NAVIGATE' && e.data.view) goView(e.data.view);
+    });
+  } catch (err) {
+    console.warn('[NEXUS] SW registration failed:', err);
+  }
+}
+
+// ── Install prompt ────────────────────────────────────────
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  // Show banner after 3 seconds if not dismissed
+  if (!localStorage.getItem('nexus_install_dismissed')) {
+    setTimeout(() => document.getElementById('pwa-banner')?.classList.add('show'), 3000);
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  document.getElementById('pwa-banner')?.classList.remove('show');
+  const btn = document.getElementById('install-btn-card');
+  if (btn) { btn.textContent = '✓ Installed'; btn.disabled = true; }
+  console.log('[NEXUS] App installed');
+});
+
+function triggerInstall() {
+  if (!deferredInstallPrompt) {
+    // iOS Safari: show instructions
+    alert('On iOS: tap the Share button (□↑) then "Add to Home Screen" to install NEXUS.');
+    return;
+  }
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.then(r => {
+    if (r.outcome === 'accepted') {
+      document.getElementById('pwa-banner')?.classList.remove('show');
+    }
+    deferredInstallPrompt = null;
+  });
+}
+
+function dismissInstall() {
+  document.getElementById('pwa-banner')?.classList.remove('show');
+  localStorage.setItem('nexus_install_dismissed', '1');
+}
+
+// ── Notification permission ───────────────────────────────
+async function requestNotifPermission() {
+  if (!('Notification' in window)) {
+    alert('Your browser does not support notifications.');
+    return;
+  }
+  const result = await Notification.requestPermission();
+  renderNotifSettings();
+  if (result === 'granted') {
+    scheduleAllNotifications();
+    // Show confirmation notification
+    setTimeout(() => {
+      new Notification('NEXUS Notifications Active', {
+        body: 'You will now receive daily reminders from your dashboard.',
+        icon: '/Nexus/manifest.json',
+        tag: 'nexus-welcome',
+      });
+    }, 500);
+  }
+}
+
+// ── Default notification settings ────────────────────────
+const DEFAULT_NOTIFS = [
+  { id: 'workout',   label: 'Daily workout reminder',    sub: 'Time to train',           defaultTime: '07:00', view: 'workout', enabled: true },
+  { id: 'journal',   label: 'Evening journal',           sub: 'Reflect on your day',     defaultTime: '21:00', view: 'journal', enabled: true },
+  { id: 'macros',    label: 'Nutrition check-in',        sub: 'Have you hit your macros?',defaultTime: '19:00', view: 'nutrition', enabled: true },
+  { id: 'goals',     label: 'Weekly goal review',        sub: 'Review your progress',    defaultTime: '09:00', view: 'goals',   enabled: false },
+  { id: 'streak',    label: 'Habit streak reminder',     sub: "Don’t break the chain",   defaultTime: '20:00', view: 'workout', enabled: true },
+  { id: 'med',       label: 'Med school hours log',      sub: 'Log today’s activities', defaultTime: '18:00', view: 'med',     enabled: false },
+];
+
+function getNotifSettings() {
+  try { return JSON.parse(localStorage.getItem('nexus_notifs')) || {}; } catch { return {}; }
+}
+function saveNotifSettings(settings) { localStorage.setItem('nexus_notifs', JSON.stringify(settings)); }
+
+function renderNotifSettings() {
+  const statusEl = document.getElementById('notif-permission-status');
+  const rowsEl = document.getElementById('notif-rows');
+  const enableBtn = document.getElementById('notif-enable-btn');
+  if (!statusEl || !rowsEl) return;
+
+  const perm = 'Notification' in window ? Notification.permission : 'unsupported';
+  const permLabels = { granted: 'Notifications enabled', denied: 'Notifications blocked — enable in phone Settings', default: 'Notifications not yet enabled', unsupported: 'Not supported in this browser' };
+  statusEl.innerHTML = `<div class="notif-status ${perm}"><div class="notif-dot"></div>${permLabels[perm] || perm}</div>`;
+  if (enableBtn) enableBtn.style.display = perm === 'granted' ? 'none' : 'inline-flex';
+
+  const settings = getNotifSettings();
+  rowsEl.innerHTML = DEFAULT_NOTIFS.map(n => {
+    const saved = settings[n.id] || {};
+    const enabled = saved.enabled !== undefined ? saved.enabled : n.enabled;
+    const time = saved.time || n.defaultTime;
+    const disabled = perm !== 'granted';
+    return `<div class="notif-row">
+      <div class="notif-info">
+        <div class="notif-label">${n.label}</div>
+        <div class="notif-sub">${n.sub}</div>
+        <div class="notif-time">
+          ${disabled ? 'Enable notifications first' :
+            `<input type="time" value="${time}" style="background:transparent;border:none;color:var(--t3);font-family:var(--mono);font-size:9px;cursor:pointer;outline:none;padding:0"
+              onchange="updateNotifTime('${n.id}',this.value)">`
+          }
+        </div>
+      </div>
+      <label class="notif-toggle" title="${disabled ? 'Enable notifications first' : ''}">
+        <input type="checkbox" ${enabled && !disabled ? 'checked' : ''} ${disabled ? 'disabled' : ''}
+          onchange="toggleNotif('${n.id}',this.checked)">
+        <span class="notif-slider"></span>
+      </label>
+    </div>`;
+  }).join('');
+}
+
+function toggleNotif(id, enabled) {
+  const settings = getNotifSettings();
+  settings[id] = { ...(settings[id] || {}), enabled };
+  saveNotifSettings(settings);
+  scheduleAllNotifications();
+}
+
+function updateNotifTime(id, time) {
+  const settings = getNotifSettings();
+  settings[id] = { ...(settings[id] || {}), time };
+  saveNotifSettings(settings);
+  scheduleAllNotifications();
+}
+
+// ── Schedule notifications via SW messages ────────────────
+function scheduleAllNotifications() {
+  if (!swReg || Notification.permission !== 'granted') return;
+  const settings = getNotifSettings();
+  const now = new Date();
+
+  DEFAULT_NOTIFS.forEach(n => {
+    const saved = settings[n.id] || {};
+    const enabled = saved.enabled !== undefined ? saved.enabled : n.enabled;
+    if (!enabled) return;
+
+    const [hh, mm] = (saved.time || n.defaultTime).split(':').map(Number);
+    const target = new Date(now);
+    target.setHours(hh, mm, 0, 0);
+    if (target <= now) target.setDate(target.getDate() + 1); // schedule for tomorrow if past
+
+    const delay = target.getTime() - now.getTime();
+    const messages = {
+      workout: ['Time to train 💪', 'Your body is waiting. Let’s get it done.'],
+      journal:  ['Evening reflection ✍️', 'A few minutes of journaling compounds into self-knowledge.'],
+      macros:   ['Nutrition check 🥗', 'Have you hit your protein target today?'],
+      goals:    ['Goal review 🎯', 'How are you tracking against this week’s goals?'],
+      streak:   ['Keep the streak alive 🔥', 'Don’t break your habit chain today.'],
+      med:      ['Med hours log 🩺', 'Log today’s clinical or volunteer hours.'],
+    };
+    const [title, body] = messages[n.id] || [n.label, n.sub];
+
+    // Send schedule message to service worker
+    navigator.serviceWorker.ready.then(reg => {
+      reg.active?.postMessage({
+        type: 'SCHEDULE_NOTIFICATION',
+        delay,
+        title,
+        body,
+        tag: 'nexus-' + n.id,
+        view: n.view,
+      });
+    });
+  });
+}
+
+// ── Handle ?view= query param (from notification tap) ─────
+function handleURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  const view = params.get('view');
+  if (view) {
+    window.history.replaceState({}, '', '/Nexus/');
+    setTimeout(() => goView(view), 400);
+  }
+}
+
+// ── Render notif settings when Today view loads ───────────
+const _origRenderToday = renderToday;
+renderToday = function() {
+  _origRenderToday();
+  renderNotifSettings();
+};
+
+window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.triggerInstall=triggerInstall;window.dismissInstall=dismissInstall;window.requestNotifPermission=requestNotifPermission;window.toggleNotif=toggleNotif;window.updateNotifTime=updateNotifTime;window.renderBrand=renderBrand;window.toggleBrandTask=toggleBrandTask;window.brandPhase=brandPhase;window.toggleRunWeek=toggleRunWeek;window.showWorkoutDay=showWorkoutDay;window.phPcKey=phPcKey;window.phPcDel=phPcDel;window.phPreview=phPreview;window.savePhysiquePhoto=savePhysiquePhoto;window.delPhysiquePhoto=delPhysiquePhoto;window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.physiquelock=physiquelock;window.physiqueTimelineClick=physiqueTimelineClick;window.renderWishlist=renderWishlist;window.setWlView=setWlView;window.setWlCat=setWlCat;window.saveWlItem=saveWlItem;window.delWlItem=delWlItem;window.toggleWlPurchased=toggleWlPurchased;window.openWlAdd=openWlAdd;window.openWlEdit=openWlEdit;window.secretHeartClick=secretHeartClick;window.secretLock=secretLock;window.pcKey=pcKey;window.pcDel=pcDel;window.openHerProfile=openHerProfile;window.herAvatarUpload=herAvatarUpload;window.saveHerProfile=saveHerProfile;window.saveWish=saveWish;window.delWish=delWish;window.saveDateIdea=saveDateIdea;window.delDateIdea=delDateIdea;window.generateDateIdea=generateDateIdea;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
 </script>
 </body>
 </html>
