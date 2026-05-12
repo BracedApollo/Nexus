@@ -11,8 +11,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#000;--s1:#070707;--s2:#0c0c0c;--s3:#111;--s4:#161616;
-  --line:rgba(255,255,255,.05);--line2:rgba(255,255,255,.10);--line3:rgba(255,255,255,.16);
-  --t1:#ededed;--t2:rgba(237,237,237,.55);--t3:rgba(237,237,237,.30);--t4:rgba(237,237,237,.15);--t5:rgba(237,237,237,.05);
+  --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.15);--line3:rgba(255,255,255,.25);
+  --t1:#f0f2f5;--t2:rgba(220,225,235,.90);--t3:rgba(200,208,220,.70);--t4:rgba(185,195,210,.50);--t5:rgba(170,180,200,.18);
   --acc:#fff;--acc-bg:rgba(255,255,255,.04);--acc-bd:rgba(255,255,255,.18);
   --green:#7a8a78;--red:#9e6b6b;--blue:#7585a0;
   --display:'Cormorant Garamond',Georgia,serif;
@@ -20,7 +20,11 @@
   --mono:'IBM Plex Mono',monospace;
   --r:6px;
 }
-html,body{background:var(--bg);color:var(--t1);font-family:var(--ui);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+html,body{background:var(--bg);color:var(--t1);font-family:var(--ui);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;text-rendering:optimizeLegibility}
+/* Silver sheen on primary text */
+.kpi-v,.page-hd h1,.modal-t,.pp-t,.card-hd-t,.r-t,.session-title,.wl-item-name,.wl-list-name{color:var(--t1);letter-spacing:.01em}
+.kpi-s,.r-s,.card-hd-a,.session-meta,.wl-item-store,.wl-list-meta{color:var(--t3)}
+.kpi-l,.r-v,.brand-week-lbl,.j-date,.sp-recent-ago,.physique-card-date{color:var(--t4)}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:none}
 .shell{position:relative;min-height:100vh;display:flex;flex-direction:column}
@@ -528,6 +532,49 @@ body.journal-active .secret-heart:hover{opacity:.45}
 @media(max-width:768px){
   .physique-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ─── BRAND VIEW ─── */
+.brand-phase-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.brand-tab{padding:5px 14px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3);cursor:pointer;background:transparent;font-family:var(--ui);transition:all .12s}
+.brand-tab:hover{border-color:var(--line3);color:var(--t1)}
+.brand-tab.active{background:#fff;border-color:#fff;color:#000}
+.brand-phase{display:none}
+.brand-phase.active{display:block}
+.brand-week{padding:14px 0;border-bottom:1px solid var(--line)}
+.brand-week:last-child{border-bottom:none}
+.brand-week-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:10px}
+.brand-week-lbl{font-family:var(--mono);font-size:8px;color:var(--t4);font-weight:300;letter-spacing:.1em}
+.brand-week-title{font-size:12px;font-weight:500;color:var(--t1);margin-top:2px}
+.brand-badge{display:inline-flex;padding:2px 8px;border-radius:99px;font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
+.brand-badge.Setup{border:1px solid rgba(255,255,255,.15);color:var(--t2)}
+.brand-badge.Learning{border:1px solid rgba(117,133,160,.4);color:#7585a0}
+.brand-badge.Deadline{border:1px solid rgba(158,107,107,.4);color:#c47070}
+.brand-badge.Research{border:1px solid rgba(200,170,100,.4);color:#c8aa64}
+.brand-badge.Milestone{border:1px solid rgba(122,138,120,.5);color:#7a8a78}
+.brand-badge.Production{border:1px solid rgba(180,150,100,.4);color:#c8a870}
+.brand-task{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:5px}
+.brand-task::before{content:'→';color:var(--t4);font-size:10px;margin-top:2px;flex-shrink:0}
+.brand-task-done{text-decoration:line-through;opacity:.4}
+.brand-check{width:14px;height:14px;border-radius:3px;border:1px solid var(--line2);flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.brand-check.done{background:#fff;border-color:#fff}
+.brand-check.done::after{content:'';width:6px;height:3px;border-left:1.5px solid #000;border-bottom:1.5px solid #000;transform:rotate(-45deg) translate(0,-1px)}
+.brand-progress-ring{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.brand-pct{font-family:var(--display);font-size:28px;font-weight:300;color:var(--t1)}
+
+/* ─── WORKOUT PROGRAM CARD ─── */
+.day-pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--t3);cursor:pointer;transition:all .12s;background:none;font-family:var(--ui)}
+.day-pill:hover{border-color:var(--line3);color:var(--t1)}
+.day-pill.active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff}
+.program-exercise{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.program-exercise:last-child{border-bottom:none}
+.program-ex-name{font-size:11px;color:var(--t2);flex:1}
+.program-ex-detail{font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:300;text-align:right}
+.run-week{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.run-week:last-child{border-bottom:none}
+.run-week-num{font-family:var(--mono);font-size:9px;color:var(--t4);width:48px;flex-shrink:0;font-weight:300}
+.run-week-desc{font-size:11px;color:var(--t2);flex:1}
+.run-week-phase{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);padding:2px 7px;border:1px solid var(--line2);border-radius:3px;flex-shrink:0}
+.run-week.done-row .run-week-desc{color:var(--t4);text-decoration:line-through}
 </style>
 </head>
 <body>
@@ -664,6 +711,80 @@ body.journal-active .secret-heart:hover{opacity:.45}
       <div class="card" style="margin-top:14px">
         <div class="card-hd"><span class="card-hd-t">Habit streak calendar</span><span style="font-size:9px;color:var(--t3);font-family:var(--mono);font-weight:300">last 28 days</span></div>
         <div class="card-bd" id="wk-streak"></div>
+      </div>
+      <!-- Weekly program -->
+      <div class="grid g2" style="margin-top:14px;align-items:start">
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-hd-t">6-Day program</span>
+            <div style="display:flex;gap:4px" id="day-pills"><button class="day-pill active" id="dp-Mon" onclick="showWorkoutDay('Mon',this)">Mon</button><button class="day-pill " id="dp-Tue" onclick="showWorkoutDay('Tue',this)">Tue</button><button class="day-pill " id="dp-Wed" onclick="showWorkoutDay('Wed',this)">Wed</button><button class="day-pill " id="dp-Thu" onclick="showWorkoutDay('Thu',this)">Thu</button><button class="day-pill " id="dp-Fri" onclick="showWorkoutDay('Fri',this)">Fri</button><button class="day-pill " id="dp-Sat" onclick="showWorkoutDay('Sat',this)">Sat</button><button class="day-pill " id="dp-Sun" onclick="showWorkoutDay('Sun',this)">Sun</button></div>
+          </div>
+          <div style="padding:6px 14px 12px" id="workout-day-panels"><div id="wday-Mon" style="display:block"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Push Day — Chest &amp; Triceps</div><div class="program-exercise"><div class="program-ex-name">Barbell Bench Press</div><div class="program-ex-detail">4×8–10 · 90s rest</div></div><div class="program-exercise"><div class="program-ex-name">Incline Dumbbell Press</div><div class="program-ex-detail">4×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Cable Chest Fly</div><div class="program-ex-detail">3×12–15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Tricep Pushdown (rope)</div><div class="program-ex-detail">4×10–12 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Overhead Tricep Extension</div><div class="program-ex-detail">3×12–15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Push-Ups (burnout)</div><div class="program-ex-detail">2×max · 60s</div></div></div><div id="wday-Tue" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Pull Day — Back &amp; Biceps</div><div class="program-exercise"><div class="program-ex-name">Romanian Deadlift</div><div class="program-ex-detail">4×8–10 · 90s</div></div><div class="program-exercise"><div class="program-ex-name">Lat Pulldown</div><div class="program-ex-detail">4×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Seated Cable Row</div><div class="program-ex-detail">4×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Single-Arm Dumbbell Row</div><div class="program-ex-detail">3×10 each · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Face Pulls</div><div class="program-ex-detail">3×15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Barbell Curl</div><div class="program-ex-detail">3×10–12 · 60s</div></div></div><div id="wday-Wed" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Leg Day — Quads, Hams &amp; Glutes</div><div class="program-exercise"><div class="program-ex-name">Barbell Back Squat</div><div class="program-ex-detail">4×8–10 · 120s</div></div><div class="program-exercise"><div class="program-ex-name">Leg Press</div><div class="program-ex-detail">4×10–12 · 90s</div></div><div class="program-exercise"><div class="program-ex-name">Walking Lunges</div><div class="program-ex-detail">3×12 each · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Leg Curl (machine)</div><div class="program-ex-detail">4×12–15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Leg Extension</div><div class="program-ex-detail">3×15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Standing Calf Raises</div><div class="program-ex-detail">4×20 · 45s</div></div></div><div id="wday-Thu" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Push Day 2 — Shoulders &amp; Traps</div><div class="program-exercise"><div class="program-ex-name">Overhead Press (barbell/DB)</div><div class="program-ex-detail">4×8–10 · 90s</div></div><div class="program-exercise"><div class="program-ex-name">Lateral Raises</div><div class="program-ex-detail">4×12–15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Front Raises</div><div class="program-ex-detail">3×12 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Arnold Press</div><div class="program-ex-detail">3×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Barbell Shrugs</div><div class="program-ex-detail">3×15 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Rear Delt Fly</div><div class="program-ex-detail">3×15 · 60s</div></div></div><div id="wday-Fri" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Pull Day 2 — Arms</div><div class="program-exercise"><div class="program-ex-name">EZ-Bar Curl</div><div class="program-ex-detail">4×10–12 · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Hammer Curl</div><div class="program-ex-detail">3×12 each · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Concentration Curl</div><div class="program-ex-detail">3×12 each · 60s</div></div><div class="program-exercise"><div class="program-ex-name">Close-Grip Bench Press</div><div class="program-ex-detail">4×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Skull Crushers</div><div class="program-ex-detail">3×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Rope Pushdown</div><div class="program-ex-detail">3×15 · 60s</div></div></div><div id="wday-Sat" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Full Body + Core</div><div class="program-exercise"><div class="program-ex-name">Goblet Squat</div><div class="program-ex-detail">3×12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Pull-Ups / Lat Pulldown</div><div class="program-ex-detail">3×8–10 · 90s</div></div><div class="program-exercise"><div class="program-ex-name">Dumbbell Shoulder Press</div><div class="program-ex-detail">3×10–12 · 75s</div></div><div class="program-exercise"><div class="program-ex-name">Plank</div><div class="program-ex-detail">3×45–60s · 45s</div></div><div class="program-exercise"><div class="program-ex-name">Russian Twists</div><div class="program-ex-detail">3×20 · 45s</div></div><div class="program-exercise"><div class="program-ex-name">Dumbbell Deadlift</div><div class="program-ex-detail">3×12 · 75s</div></div></div><div id="wday-Sun" style="display:none"><div style="font-size:10px;color:var(--t3);margin-bottom:10px;font-style:italic;padding:8px 0;border-bottom:1px solid var(--line)">Rest &amp; Active Recovery</div><div class="program-exercise"><div class="program-ex-name">Light Walk</div><div class="program-ex-detail">15–20 min</div></div><div class="program-exercise"><div class="program-ex-name">Full Body Stretching</div><div class="program-ex-detail">5–10 min</div></div><div class="program-exercise"><div class="program-ex-name">Foam Rolling</div><div class="program-ex-detail">5–10 min</div></div><div class="program-exercise"><div class="program-ex-name">Deep Breathing / Meditation</div><div class="program-ex-detail">5–10 min</div></div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-hd-t">12-Week running plan</span><span style="font-size:9px;color:var(--t4);font-family:var(--mono);font-weight:300">Asthma-safe · check off weeks</span></div>
+          <div style="padding:6px 14px 12px" id="running-plan-rows"><div class="run-week" id="rw-Wk_1">
+      <div class="run-week-num">Wk 1</div>
+      <div class="run-week-desc">Walk 4 min → Jog 1 min × 6 (30 min) · Mon/Wed/Fri</div>
+      <div class="run-week-phase" style="border-color:#7585a0;color:#7585a0">Foundation</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_1" onclick="toggleRunWeek('Wk_1')"></div>
+    </div><div class="run-week" id="rw-Wk_2">
+      <div class="run-week-num">Wk 2</div>
+      <div class="run-week-desc">Walk 3 min → Jog 1 min × 7 (28 min)</div>
+      <div class="run-week-phase" style="border-color:#7585a0;color:#7585a0">Foundation</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_2" onclick="toggleRunWeek('Wk_2')"></div>
+    </div><div class="run-week" id="rw-Wk_3">
+      <div class="run-week-num">Wk 3</div>
+      <div class="run-week-desc">Walk 3 min → Jog 2 min × 6 (30 min)</div>
+      <div class="run-week-phase" style="border-color:#c8aa64;color:#c8aa64">Building</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_3" onclick="toggleRunWeek('Wk_3')"></div>
+    </div><div class="run-week" id="rw-Wk_4">
+      <div class="run-week-num">Wk 4</div>
+      <div class="run-week-desc">Walk 2 min → Jog 2 min × 8 (32 min) · Mon/Wed/Sat</div>
+      <div class="run-week-phase" style="border-color:#c8aa64;color:#c8aa64">Building</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_4" onclick="toggleRunWeek('Wk_4')"></div>
+    </div><div class="run-week" id="rw-Wk_5">
+      <div class="run-week-num">Wk 5</div>
+      <div class="run-week-desc">Walk 2 min → Jog 3 min × 6 (30 min)</div>
+      <div class="run-week-phase" style="border-color:#c8aa64;color:#c8aa64">Building</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_5" onclick="toggleRunWeek('Wk_5')"></div>
+    </div><div class="run-week" id="rw-Wk_6">
+      <div class="run-week-num">Wk 6</div>
+      <div class="run-week-desc">Walk 1 min → Jog 4 min × 6 (30 min)</div>
+      <div class="run-week-phase" style="border-color:#c47070;color:#c47070">Transition</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_6" onclick="toggleRunWeek('Wk_6')"></div>
+    </div><div class="run-week" id="rw-Wk_7">
+      <div class="run-week-num">Wk 7</div>
+      <div class="run-week-desc">Walk 1 min → Jog 5 min × 5 (30 min)</div>
+      <div class="run-week-phase" style="border-color:#c47070;color:#c47070">Transition</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_7" onclick="toggleRunWeek('Wk_7')"></div>
+    </div><div class="run-week" id="rw-Wk_8">
+      <div class="run-week-num">Wk 8</div>
+      <div class="run-week-desc">Jog 8 min → Walk 2 min × 3 (30 min)</div>
+      <div class="run-week-phase" style="border-color:#c47070;color:#c47070">Transition</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_8" onclick="toggleRunWeek('Wk_8')"></div>
+    </div><div class="run-week" id="rw-Wk_9">
+      <div class="run-week-num">Wk 9</div>
+      <div class="run-week-desc">Jog 10 min → Walk 2 min × 2, then jog 8 min</div>
+      <div class="run-week-phase" style="border-color:#7a8a78;color:#7a8a78">Running</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_9" onclick="toggleRunWeek('Wk_9')"></div>
+    </div><div class="run-week" id="rw-Wk_10">
+      <div class="run-week-num">Wk 10</div>
+      <div class="run-week-desc">Jog 20 min continuous (easy pace) 🎯</div>
+      <div class="run-week-phase" style="border-color:#7a8a78;color:#7a8a78">Running</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_10" onclick="toggleRunWeek('Wk_10')"></div>
+    </div><div class="run-week" id="rw-Wk_11">
+      <div class="run-week-num">Wk 11</div>
+      <div class="run-week-desc">Jog 25 min continuous (easy pace)</div>
+      <div class="run-week-phase" style="border-color:#7a8a78;color:#7a8a78">Running</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_11" onclick="toggleRunWeek('Wk_11')"></div>
+    </div><div class="run-week" id="rw-Wk_12">
+      <div class="run-week-num">Wk 12</div>
+      <div class="run-week-desc">Jog 30 min continuous — 5K pace 🏁</div>
+      <div class="run-week-phase" style="border-color:#7a8a78;color:#7a8a78">Running</div>
+      <div class="brand-check" style="flex-shrink:0" id="rc-Wk_12" onclick="toggleRunWeek('Wk_12')"></div>
+    </div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -820,6 +941,268 @@ body.journal-active .secret-heart:hover{opacity:.45}
       </div>
       <!-- Entry list -->
       <div id="journal-entries"></div>
+    </div>
+  </div>
+
+  <!-- BRAND VIEW -->
+  <div class="view" id="view-brand">
+    <div class="page-wrap">
+      <div class="page-hd">
+        <div><h1>Brand</h1><div class="sub">Clothing brand launch roadmap · 12-week plan</div></div>
+        <div id="brand-overall-pct" style="font-family:var(--mono);font-size:10px;color:var(--t3);font-weight:300;align-self:center"></div>
+      </div>
+      <!-- Overall progress bar -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <span style="font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t4)">Overall progress</span>
+          <span style="font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:300" id="brand-pct-lbl">0 tasks completed</span>
+        </div>
+        <div style="height:3px;background:var(--line);border-radius:99px;overflow:hidden">
+          <div id="brand-prog-fill" style="height:100%;background:#fff;border-radius:99px;width:0%;transition:width .6s ease"></div>
+        </div>
+      </div>
+      <!-- Phase tabs -->
+      <div class="brand-phase-tabs"><button class="brand-tab active" onclick="brandPhase('p1',this)">Phase 1 — Foundation <span style="opacity:.5;font-size:10px">· May · Weeks 1–3</span></button><button class="brand-tab " onclick="brandPhase('p2',this)">Phase 2 — Design <span style="opacity:.5;font-size:10px">· June · Weeks 4–7</span></button><button class="brand-tab " onclick="brandPhase('p3',this)">Phase 3 — Tech Pack <span style="opacity:.5;font-size:10px">· Late June · Weeks 8–9</span></button><button class="brand-tab " onclick="brandPhase('p4',this)">Phase 4 — Production <span style="opacity:.5;font-size:10px">· July–Aug · Weeks 10–12</span></button></div>
+      <!-- Phase content -->
+      <div class="card">
+        <div class="card-bd" style="padding:6px 16px 14px">
+          <div class="brand-phase active" id="brand-phase-p1"><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 1 · May 12–18</div>
+              <div class="brand-week-title">Brand direction + install Illustrator</div>
+            </div>
+            <span class="brand-badge Setup">Setup</span>
+          </div>
+          <div class="brand-task" id="bt-p1_Week_1_0">
+              <div class="brand-check" id="bc-p1_Week_1_0" onclick="toggleBrandTask('p1_Week_1_0')"></div>
+              <span class="brand-task-text">Define your niche — write 2 sentences: who is your customer, what do they stand for?</span>
+            </div><div class="brand-task" id="bt-p1_Week_1_1">
+              <div class="brand-check" id="bc-p1_Week_1_1" onclick="toggleBrandTask('p1_Week_1_1')"></div>
+              <span class="brand-task-text">Build a mood board (Pinterest or Milanote) — 50+ images of aesthetics, fabrics, silhouettes</span>
+            </div><div class="brand-task" id="bt-p1_Week_1_2">
+              <div class="brand-check" id="bc-p1_Week_1_2" onclick="toggleBrandTask('p1_Week_1_2')"></div>
+              <span class="brand-task-text">Install Adobe Illustrator (free trial or Creative Cloud plan)</span>
+            </div><div class="brand-task" id="bt-p1_Week_1_3">
+              <div class="brand-check" id="bc-p1_Week_1_3" onclick="toggleBrandTask('p1_Week_1_3')"></div>
+              <span class="brand-task-text">Pick your one hero garment — hoodie, tee, trouser, etc. Commit to one.</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 2 · May 19–25</div>
+              <div class="brand-week-title">Illustrator basics — shapes &amp; paths</div>
+            </div>
+            <span class="brand-badge Learning">Learning</span>
+          </div>
+          <div class="brand-task" id="bt-p1_Week_2_0">
+              <div class="brand-check" id="bc-p1_Week_2_0" onclick="toggleBrandTask('p1_Week_2_0')"></div>
+              <span class="brand-task-text">Complete Illustrator basics: pen tool, anchor points, shapes, fills &amp; strokes (1hr/day)</span>
+            </div><div class="brand-task" id="bt-p1_Week_2_1">
+              <div class="brand-check" id="bc-p1_Week_2_1" onclick="toggleBrandTask('p1_Week_2_1')"></div>
+              <span class="brand-task-text">Study 5 brands you admire — screenshot their flat sketches, save for reference</span>
+            </div><div class="brand-task" id="bt-p1_Week_2_2">
+              <div class="brand-check" id="bc-p1_Week_2_2" onclick="toggleBrandTask('p1_Week_2_2')"></div>
+              <span class="brand-task-text">Search &quot;tech pack template free download&quot; — save 2–3 examples to study their structure</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 3 · May 26–June 1</div>
+              <div class="brand-week-title">First flat sketch attempt</div>
+            </div>
+            <span class="brand-badge Deadline">Deadline</span>
+          </div>
+          <div class="brand-task" id="bt-p1_Week_3_0">
+              <div class="brand-check" id="bc-p1_Week_3_0" onclick="toggleBrandTask('p1_Week_3_0')"></div>
+              <span class="brand-task-text">Draw your garment by hand first — front view, back view, any key details</span>
+            </div><div class="brand-task" id="bt-p1_Week_3_1">
+              <div class="brand-check" id="bc-p1_Week_3_1" onclick="toggleBrandTask('p1_Week_3_1')"></div>
+              <span class="brand-task-text">Attempt to recreate it as a flat sketch in Illustrator — doesn&#39;t need to be perfect</span>
+            </div><div class="brand-task" id="bt-p1_Week_3_2">
+              <div class="brand-check" id="bc-p1_Week_3_2" onclick="toggleBrandTask('p1_Week_3_2')"></div>
+              <span class="brand-task-text">Deliverable by June 1: One rough flat sketch (front + back) saved as .ai file</span>
+            </div>
+        </div></div><div class="brand-phase " id="brand-phase-p2"><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 4 · June 2–8</div>
+              <div class="brand-week-title">Refine your flat sketch</div>
+            </div>
+            <span class="brand-badge Learning">Learning</span>
+          </div>
+          <div class="brand-task" id="bt-p2_Week_4_0">
+              <div class="brand-check" id="bc-p2_Week_4_0" onclick="toggleBrandTask('p2_Week_4_0')"></div>
+              <span class="brand-task-text">Redraw your flat sketch 3x with improvements each time — practice makes precision</span>
+            </div><div class="brand-task" id="bt-p2_Week_4_1">
+              <div class="brand-check" id="bc-p2_Week_4_1" onclick="toggleBrandTask('p2_Week_4_1')"></div>
+              <span class="brand-task-text">Add construction details to your sketch: stitching lines, zipper placement, pocket placement</span>
+            </div><div class="brand-task" id="bt-p2_Week_4_2">
+              <div class="brand-check" id="bc-p2_Week_4_2" onclick="toggleBrandTask('p2_Week_4_2')"></div>
+              <span class="brand-task-text">Choose 2–3 colorways for your garment and apply them in Illustrator</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 5 · June 9–15</div>
+              <div class="brand-week-title">Fabric &amp; materials research</div>
+            </div>
+            <span class="brand-badge Research">Research</span>
+          </div>
+          <div class="brand-task" id="bt-p2_Week_5_0">
+              <div class="brand-check" id="bc-p2_Week_5_0" onclick="toggleBrandTask('p2_Week_5_0')"></div>
+              <span class="brand-task-text">Order fabric swatches from Mood Fabrics or Fabric.com — feel the materials</span>
+            </div><div class="brand-task" id="bt-p2_Week_5_1">
+              <div class="brand-check" id="bc-p2_Week_5_1" onclick="toggleBrandTask('p2_Week_5_1')"></div>
+              <span class="brand-task-text">Create a materials list: fabric type, weight (gsm), composition (e.g. 80% cotton, 20% poly)</span>
+            </div><div class="brand-task" id="bt-p2_Week_5_2">
+              <div class="brand-check" id="bc-p2_Week_5_2" onclick="toggleBrandTask('p2_Week_5_2')"></div>
+              <span class="brand-task-text">Research trims: zipper type, button size, label style, care tag requirements</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 6 · June 16–22</div>
+              <div class="brand-week-title">Measurements &amp; sizing</div>
+            </div>
+            <span class="brand-badge Learning">Learning</span>
+          </div>
+          <div class="brand-task" id="bt-p2_Week_6_0">
+              <div class="brand-check" id="bc-p2_Week_6_0" onclick="toggleBrandTask('p2_Week_6_0')"></div>
+              <span class="brand-task-text">Learn grading and size charts — download a standard size spec sheet (S/M/L/XL)</span>
+            </div><div class="brand-task" id="bt-p2_Week_6_1">
+              <div class="brand-check" id="bc-p2_Week_6_1" onclick="toggleBrandTask('p2_Week_6_1')"></div>
+              <span class="brand-task-text">Build your own measurement spec table in Excel/Google Sheets for your garment</span>
+            </div><div class="brand-task" id="bt-p2_Week_6_2">
+              <div class="brand-check" id="bc-p2_Week_6_2" onclick="toggleBrandTask('p2_Week_6_2')"></div>
+              <span class="brand-task-text">Decide: launch in 1 size first (easiest) or S–XL? Manufacturers prefer fewer sizes for samples.</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 7 · June 23–29</div>
+              <div class="brand-week-title">Final design — locked in</div>
+            </div>
+            <span class="brand-badge Deadline">Deadline</span>
+          </div>
+          <div class="brand-task" id="bt-p2_Week_7_0">
+              <div class="brand-check" id="bc-p2_Week_7_0" onclick="toggleBrandTask('p2_Week_7_0')"></div>
+              <span class="brand-task-text">Lock your final design — no more changes after this week. Scope creep kills timelines.</span>
+            </div><div class="brand-task" id="bt-p2_Week_7_1">
+              <div class="brand-check" id="bc-p2_Week_7_1" onclick="toggleBrandTask('p2_Week_7_1')"></div>
+              <span class="brand-task-text">Final flat sketch: clean front, back, and detail views at 100% precision</span>
+            </div><div class="brand-task" id="bt-p2_Week_7_2">
+              <div class="brand-check" id="bc-p2_Week_7_2" onclick="toggleBrandTask('p2_Week_7_2')"></div>
+              <span class="brand-task-text">Deliverable by June 29: Final .ai flat sketch file + materials list + measurement chart</span>
+            </div>
+        </div></div><div class="brand-phase " id="brand-phase-p3"><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 8 · June 30–July 6</div>
+              <div class="brand-week-title">Build your tech pack</div>
+            </div>
+            <span class="brand-badge Build">Build</span>
+          </div>
+          <div class="brand-task" id="bt-p3_Week_8_0">
+              <div class="brand-check" id="bc-p3_Week_8_0" onclick="toggleBrandTask('p3_Week_8_0')"></div>
+              <span class="brand-task-text">Use a free tech pack template (Techpacker has one) as your starting point</span>
+            </div><div class="brand-task" id="bt-p3_Week_8_1">
+              <div class="brand-check" id="bc-p3_Week_8_1" onclick="toggleBrandTask('p3_Week_8_1')"></div>
+              <span class="brand-task-text">Fill in: flat sketches, colorways, materials/BOM (bill of materials), measurements, label/packaging notes</span>
+            </div><div class="brand-task" id="bt-p3_Week_8_2">
+              <div class="brand-check" id="bc-p3_Week_8_2" onclick="toggleBrandTask('p3_Week_8_2')"></div>
+              <span class="brand-task-text">Add reference photos for any construction detail that&#39;s hard to sketch</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 9 · July 7–13</div>
+              <div class="brand-week-title">Find &amp; contact manufacturers</div>
+            </div>
+            <span class="brand-badge Outreach">Outreach</span>
+          </div>
+          <div class="brand-task" id="bt-p3_Week_9_0">
+              <div class="brand-check" id="bc-p3_Week_9_0" onclick="toggleBrandTask('p3_Week_9_0')"></div>
+              <span class="brand-task-text">Search Alibaba (overseas) and Maker&#39;s Row (USA) for manufacturers who make your garment type</span>
+            </div><div class="brand-task" id="bt-p3_Week_9_1">
+              <div class="brand-check" id="bc-p3_Week_9_1" onclick="toggleBrandTask('p3_Week_9_1')"></div>
+              <span class="brand-task-text">Contact 5–10 manufacturers — ask about MOQ, sample price, lead time, and payment terms</span>
+            </div><div class="brand-task" id="bt-p3_Week_9_2">
+              <div class="brand-check" id="bc-p3_Week_9_2" onclick="toggleBrandTask('p3_Week_9_2')"></div>
+              <span class="brand-task-text">On Alibaba: filter for Verified Supplier + Trade Assurance only — never pay outside of it</span>
+            </div><div class="brand-task" id="bt-p3_Week_9_3">
+              <div class="brand-check" id="bc-p3_Week_9_3" onclick="toggleBrandTask('p3_Week_9_3')"></div>
+              <span class="brand-task-text">Create a comparison spreadsheet: price/unit, MOQ, sample cost, location, communication quality</span>
+            </div>
+        </div></div><div class="brand-phase " id="brand-phase-p4"><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 10 · July 14–20</div>
+              <div class="brand-week-title">Choose manufacturer + send tech pack</div>
+            </div>
+            <span class="brand-badge Deadline">Deadline</span>
+          </div>
+          <div class="brand-task" id="bt-p4_Week_1_0">
+              <div class="brand-check" id="bc-p4_Week_1_0" onclick="toggleBrandTask('p4_Week_1_0')"></div>
+              <span class="brand-task-text">Select your manufacturer based on communication quality, price, and credibility</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_1">
+              <div class="brand-check" id="bc-p4_Week_1_1" onclick="toggleBrandTask('p4_Week_1_1')"></div>
+              <span class="brand-task-text">Send your tech pack and request a sample quote — confirm sample timeline</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_2">
+              <div class="brand-check" id="bc-p4_Week_1_2" onclick="toggleBrandTask('p4_Week_1_2')"></div>
+              <span class="brand-task-text">Pay sample deposit (typically 50% upfront, $100–$300) — use Trade Assurance if Alibaba</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_3">
+              <div class="brand-check" id="bc-p4_Week_1_3" onclick="toggleBrandTask('p4_Week_1_3')"></div>
+              <span class="brand-task-text">Deliverable by July 20: Tech pack sent, manufacturer confirmed, sample in production</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 11 · July 21–27</div>
+              <div class="brand-week-title">Sample in transit</div>
+            </div>
+            <span class="brand-badge Waiting">Waiting</span>
+          </div>
+          <div class="brand-task" id="bt-p4_Week_1_0">
+              <div class="brand-check" id="bc-p4_Week_1_0" onclick="toggleBrandTask('p4_Week_1_0')"></div>
+              <span class="brand-task-text">Sample is being made — typical lead time is 2–4 weeks from payment</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_1">
+              <div class="brand-check" id="bc-p4_Week_1_1" onclick="toggleBrandTask('p4_Week_1_1')"></div>
+              <span class="brand-task-text">Use this time to start building your Instagram/TikTok — behind-the-scenes content performs well</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_2">
+              <div class="brand-check" id="bc-p4_Week_1_2" onclick="toggleBrandTask('p4_Week_1_2')"></div>
+              <span class="brand-task-text">Set up your Shopify store (draft mode) — product pages, branding, domain name</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_3">
+              <div class="brand-check" id="bc-p4_Week_1_3" onclick="toggleBrandTask('p4_Week_1_3')"></div>
+              <span class="brand-task-text">Register your LLC and open a business bank account if not done yet</span>
+            </div>
+        </div><div class="brand-week">
+          <div class="brand-week-hd">
+            <div>
+              <div class="brand-week-lbl">Week 12 · July 28–Aug 3</div>
+              <div class="brand-week-title">🎉 Sample arrives — review &amp; iterate</div>
+            </div>
+            <span class="brand-badge Milestone">Milestone</span>
+          </div>
+          <div class="brand-task" id="bt-p4_Week_1_0">
+              <div class="brand-check" id="bc-p4_Week_1_0" onclick="toggleBrandTask('p4_Week_1_0')"></div>
+              <span class="brand-task-text">Inspect everything: fit, stitching, fabric feel, color accuracy, construction quality</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_1">
+              <div class="brand-check" id="bc-p4_Week_1_1" onclick="toggleBrandTask('p4_Week_1_1')"></div>
+              <span class="brand-task-text">Photograph and document every issue — annotate photos to send back to manufacturer</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_2">
+              <div class="brand-check" id="bc-p4_Week_1_2" onclick="toggleBrandTask('p4_Week_1_2')"></div>
+              <span class="brand-task-text">Rate each issue: must fix vs. nice to fix — don&#39;t request endless revisions</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_3">
+              <div class="brand-check" id="bc-p4_Week_1_3" onclick="toggleBrandTask('p4_Week_1_3')"></div>
+              <span class="brand-task-text">Send revision notes back to manufacturer — request sample round 2 if needed</span>
+            </div><div class="brand-task" id="bt-p4_Week_1_4">
+              <div class="brand-check" id="bc-p4_Week_1_4" onclick="toggleBrandTask('p4_Week_1_4')"></div>
+              <span class="brand-task-text">If the sample is approved: congratulations — you&#39;re ready to discuss production pricing</span>
+            </div>
+        </div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1249,6 +1632,8 @@ const defaults=()=>({
   streaks:[{id:'wk',name:'Workout',dates:{}},{id:'nj',name:'No junk food',dates:{}},{id:'jn',name:'Journaling',dates:{}},{id:'st',name:'Study time',dates:{}}],
   customEvents:[],
   myWishlist:[],
+  brandTasks:{},
+  runWeeks:{},
   physiquePhotos:[],
   her:{name:'',tagline:'',avatar:'',bday:'',anniversary:'',features:'',favFood:'',favRestaurants:'',favStores:'',loves:'',dislikes:'',loveLang:''},
   wishes:[],
@@ -1298,28 +1683,30 @@ function goView(v){
   if(v==='spotify'){renderSpotify();}
   if(v==='secret')renderSecret();
   if(v==='wishlist')renderWishlist();
+  if(v==='brand')renderBrand();
 }
 function goHub(){goView('hub');}
 const HUB_NODES=[
-  {id:'today',     label:'TODAY',     cx:0.50, cy:0.50, r:58, core:true},
-  {id:'body',      label:'BODY',      cx:0.22, cy:0.18, r:24},
-  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.10, r:24},
-  {id:'goals',     label:'GOALS',     cx:0.78, cy:0.18, r:24},
-  {id:'tasks',     label:'TASKS',     cx:0.92, cy:0.45, r:24},
-  {id:'workout',   label:'TRAINING',  cx:0.88, cy:0.75, r:24},
-  {id:'cal',       label:'TIMELINE',  cx:0.65, cy:0.92, r:24},
-  {id:'wishlist',  label:'WISHLIST',  cx:0.42, cy:0.92, r:24},
-  {id:'spotify',   label:'SPOTIFY',   cx:0.22, cy:0.85, r:24, spotify:true},
-  {id:'med',       label:'MED SCHOOL',cx:0.08, cy:0.60, r:24},
-  {id:'journal',   label:'JOURNAL',   cx:0.08, cy:0.30, r:24},
+  {id:'today',     label:'TODAY',     cx:0.50, cy:0.50, r:56, core:true},
+  {id:'body',      label:'BODY',      cx:0.25, cy:0.15, r:22},
+  {id:'nutrition', label:'NUTRITION', cx:0.50, cy:0.08, r:22},
+  {id:'goals',     label:'GOALS',     cx:0.75, cy:0.15, r:22},
+  {id:'tasks',     label:'TASKS',     cx:0.94, cy:0.40, r:22},
+  {id:'workout',   label:'TRAINING',  cx:0.94, cy:0.65, r:22},
+  {id:'cal',       label:'TIMELINE',  cx:0.78, cy:0.88, r:22},
+  {id:'wishlist',  label:'WISHLIST',  cx:0.55, cy:0.94, r:22},
+  {id:'brand',     label:'BRAND',     cx:0.34, cy:0.94, r:22},
+  {id:'spotify',   label:'SPOTIFY',   cx:0.14, cy:0.82, r:22, spotify:true},
+  {id:'med',       label:'MED SCHOOL',cx:0.06, cy:0.58, r:22},
+  {id:'journal',   label:'JOURNAL',   cx:0.08, cy:0.32, r:22},
 ];
 const HUB_EDGES=[
   ['today','body'],['today','nutrition'],['today','goals'],['today','tasks'],
-  ['today','workout'],['today','cal'],['today','wishlist'],['today','spotify'],
-  ['today','med'],['today','journal'],
+  ['today','workout'],['today','cal'],['today','wishlist'],['today','brand'],
+  ['today','spotify'],['today','med'],['today','journal'],
   ['body','nutrition'],['nutrition','goals'],['goals','tasks'],
   ['tasks','workout'],['workout','cal'],['cal','wishlist'],
-  ['wishlist','spotify'],['spotify','med'],['med','journal'],['journal','body'],
+  ['wishlist','brand'],['brand','spotify'],['spotify','med'],['med','journal'],['journal','body'],
 ];
 let hubCanvas, hubCtx, hubMouse={x:-9999,y:-9999}, hubHover=null, hubPulses=[], hubBgDots=[], hubAnim=false, hubT=0;
 function nodeStat(n){
@@ -1335,6 +1722,7 @@ function nodeStat(n){
     case 'journal': return (S.journalEntries||[]).length+' entries';
     case 'spotify': return spConnected()?'connected':'tap to connect';
     case 'wishlist': {const w=S.myWishlist||[];const tot=w.reduce((a,i)=>a+(parseFloat(i.price)||0),0);return w.length+' items';}
+    case 'brand': {const done=(S.brandTasks||{});const tot=Object.keys(done).length;return tot+' done';}
     default: return '';
   }
 }
@@ -3451,7 +3839,83 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='Enter'&&phPcBuffer.length===3){phPcSubmit();}
 });
 
-window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.phPcKey=phPcKey;window.phPcDel=phPcDel;window.phPreview=phPreview;window.savePhysiquePhoto=savePhysiquePhoto;window.delPhysiquePhoto=delPhysiquePhoto;window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.physiquelock=physiquelock;window.physiqueTimelineClick=physiqueTimelineClick;window.renderWishlist=renderWishlist;window.setWlView=setWlView;window.setWlCat=setWlCat;window.saveWlItem=saveWlItem;window.delWlItem=delWlItem;window.toggleWlPurchased=toggleWlPurchased;window.openWlAdd=openWlAdd;window.openWlEdit=openWlEdit;window.secretHeartClick=secretHeartClick;window.secretLock=secretLock;window.pcKey=pcKey;window.pcDel=pcDel;window.openHerProfile=openHerProfile;window.herAvatarUpload=herAvatarUpload;window.saveHerProfile=saveHerProfile;window.saveWish=saveWish;window.delWish=delWish;window.saveDateIdea=saveDateIdea;window.delDateIdea=delDateIdea;window.generateDateIdea=generateDateIdea;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
+
+// ═══════════════════════════════════════════════════════
+//  BRAND ROADMAP ENGINE
+// ═══════════════════════════════════════════════════════
+if(!S.brandTasks)S.brandTasks={};
+if(!S.runWeeks)S.runWeeks={};
+
+// Total task count across all phases (for progress bar)
+const BRAND_TOTAL_TASKS=36; // 12 weeks × ~3 tasks avg
+
+function renderBrand(){
+  updateBrandProgress();
+  // Restore checked states
+  Object.keys(S.brandTasks||{}).forEach(id=>{
+    const check=document.getElementById('bc-'+id);
+    const task=document.getElementById('bt-'+id);
+    if(check){check.classList.toggle('done',!!S.brandTasks[id]);}
+    if(task){const span=task.querySelector('.brand-task-text');if(span)span.classList.toggle('brand-task-done',!!S.brandTasks[id]);}
+  });
+  // Restore run week checks
+  Object.keys(S.runWeeks||{}).forEach(id=>{
+    const check=document.getElementById('rc-'+id);
+    const row=document.getElementById('rw-'+id);
+    if(check)check.classList.toggle('done',!!S.runWeeks[id]);
+    if(row)row.classList.toggle('done-row',!!S.runWeeks[id]);
+  });
+}
+
+function updateBrandProgress(){
+  const done=Object.values(S.brandTasks||{}).filter(Boolean).length;
+  const pct=Math.min(100,Math.round(done/BRAND_TOTAL_TASKS*100));
+  const fill=document.getElementById('brand-prog-fill');
+  const lbl=document.getElementById('brand-pct-lbl');
+  if(fill)fill.style.width=pct+'%';
+  if(lbl)lbl.textContent=done+' tasks completed · '+pct+'%';
+}
+
+function toggleBrandTask(id){
+  S.brandTasks=S.brandTasks||{};
+  S.brandTasks[id]=!S.brandTasks[id];
+  const check=document.getElementById('bc-'+id);
+  const task=document.getElementById('bt-'+id);
+  if(check)check.classList.toggle('done',!!S.brandTasks[id]);
+  if(task){const span=task.querySelector('.brand-task-text');if(span)span.classList.toggle('brand-task-done',!!S.brandTasks[id]);}
+  save();updateBrandProgress();
+}
+
+function brandPhase(id,btn){
+  document.querySelectorAll('.brand-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.brand-phase').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const el=document.getElementById('brand-phase-'+id);
+  if(el)el.classList.add('active');
+}
+
+// ── Running plan ──────────────────────────────────────────
+function toggleRunWeek(id){
+  S.runWeeks=S.runWeeks||{};
+  S.runWeeks[id]=!S.runWeeks[id];
+  const check=document.getElementById('rc-'+id);
+  const row=document.getElementById('rw-'+id);
+  if(check)check.classList.toggle('done',!!S.runWeeks[id]);
+  if(row)row.classList.toggle('done-row',!!S.runWeeks[id]);
+  save();
+}
+
+// ── Workout day selector ──────────────────────────────────
+function showWorkoutDay(day,btn){
+  document.querySelectorAll('.day-pill').forEach(p=>p.classList.remove('active'));
+  const panels=document.getElementById('workout-day-panels');
+  if(panels)panels.querySelectorAll('[id^="wday-"]').forEach(p=>p.style.display='none');
+  btn.classList.add('active');
+  const panel=document.getElementById('wday-'+day);
+  if(panel)panel.style.display='block';
+}
+
+window.goView=goView;window.goHub=goHub;window.openProfile=openProfile;window.closeProfile=closeProfile;window.ppTab=ppTab;window.handleAvatar=handleAvatar;window.saveAndApply=saveAndApply;window.liveProfile=liveProfile;window.openModal=openModal;window.closeModal=closeModal;window.logWeight=logWeight;window.saveGoal=saveGoal;window.delGoal=delGoal;window.saveTask=saveTask;window.toggleTask=toggleTask;window.delTask=delTask;window.toggleFoodForm=toggleFoodForm;window.addFood=addFood;window.delFood=delFood;window.delWeight=delWeight;window.openWorkoutModal=openWorkoutModal;window.openGymModal=openGymModal;window.saveGym=saveGym;window.addExerciseRow=addExerciseRow;window.saveWorkout=saveWorkout;window.delWorkout=delWorkout;window.setGymFilter=setGymFilter;window.toggleSession=toggleSession;window.toggleStreak=toggleStreak;window.addStreak=addStreak;window.delStreak=delStreak;window.calNav=calNav;window.calToday=calToday;window.calDayClick=calDayClick;window.openCustomEventModal=openCustomEventModal;window.quickAddEvent=quickAddEvent;window.saveCustomEvent=saveCustomEvent;window.delCustomEvent=delCustomEvent;window.enKey=enKey;window.enCommit=enCommit;window.enFocus=enFocus;window.loadDirective=loadDirective;window.generateWeeklyTasks=generateWeeklyTasks;window.spConnect=spConnect;window.spToggle=spToggle;window.spNext=spNext;window.spPrev=spPrev;window.spSeek=spSeek;window.spPlay=spPlay;window.spFetchRecent=spFetchRecent;window.spFetchNow=spFetchNow;window.renderMed=renderMed;window.renderBrand=renderBrand;window.toggleBrandTask=toggleBrandTask;window.brandPhase=brandPhase;window.toggleRunWeek=toggleRunWeek;window.showWorkoutDay=showWorkoutDay;window.phPcKey=phPcKey;window.phPcDel=phPcDel;window.phPreview=phPreview;window.savePhysiquePhoto=savePhysiquePhoto;window.delPhysiquePhoto=delPhysiquePhoto;window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.physiquelock=physiquelock;window.physiqueTimelineClick=physiqueTimelineClick;window.renderWishlist=renderWishlist;window.setWlView=setWlView;window.setWlCat=setWlCat;window.saveWlItem=saveWlItem;window.delWlItem=delWlItem;window.toggleWlPurchased=toggleWlPurchased;window.openWlAdd=openWlAdd;window.openWlEdit=openWlEdit;window.secretHeartClick=secretHeartClick;window.secretLock=secretLock;window.pcKey=pcKey;window.pcDel=pcDel;window.openHerProfile=openHerProfile;window.herAvatarUpload=herAvatarUpload;window.saveHerProfile=saveHerProfile;window.saveWish=saveWish;window.delWish=delWish;window.saveDateIdea=saveDateIdea;window.delDateIdea=delDateIdea;window.generateDateIdea=generateDateIdea;window.saveMedActivity=saveMedActivity;window.delMedActivity=delMedActivity;window.saveMedSchool=saveMedSchool;window.delMedSchool=delMedSchool;window.saveResume=saveResume;window.openJournalForm=openJournalForm;window.closeJournalForm=closeJournalForm;window.selectMood=selectMood;window.saveJournalEntry=saveJournalEntry;window.toggleJournalEntry=toggleJournalEntry;window.delJournalEntry=delJournalEntry;
 </script>
 </body>
 </html>
